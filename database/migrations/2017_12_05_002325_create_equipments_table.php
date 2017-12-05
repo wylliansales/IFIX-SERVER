@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAttendantsHasDepartmentsTable extends Migration
+class CreateEquipmentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class CreateAttendantsHasDepartmentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('attendants_has_departments', function (Blueprint $table) {
+        Schema::create('equipments', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('sector_id')->unsigned();
+            $table->foreign('sector_id')->references('id')->on('sectors');
+            $table->integer('category_id')->unsigned();
+            $table->foreign('category_id')->references('id')->on('categories');
             $table->timestamps();
         });
     }
@@ -26,6 +30,6 @@ class CreateAttendantsHasDepartmentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('attendants_has_departments');
+        Schema::dropIfExists('equipments');
     }
 }

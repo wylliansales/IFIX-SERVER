@@ -15,6 +15,10 @@ class CreateRequestsHasEquipmentsTable extends Migration
     {
         Schema::create('requests_has_equipments', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('request_id')->unsigned();
+            $table->foreign('request_id')->references('id')->on('requests');
+            $table->integer('equipment_id')->unsigned();
+            $table->foreign('equipment_id')->references('id')->on('equipments');
             $table->timestamps();
         });
     }
