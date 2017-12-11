@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateStatusHasRequestsTable extends Migration
+class CreateRequestStatusTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateStatusHasRequestsTable extends Migration
      */
     public function up()
     {
-        Schema::create('status_has_requests', function (Blueprint $table) {
+        Schema::create('request_status', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('status_id')->unsigned();
-            $table->foreign('status_id')->references('id')->on('status');
             $table->integer('request_id')->unsigned();
             $table->foreign('request_id')->references('id')->on('requests');
+            $table->integer('status_id')->unsigned();
+            $table->foreign('status_id')->references('id')->on('status');
             $table->string('description');
             $table->timestamps();
         });
@@ -31,6 +31,6 @@ class CreateStatusHasRequestsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('status_has_requests');
+        Schema::dropIfExists('request_status');
     }
 }

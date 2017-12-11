@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRequestsHasEquipmentsTable extends Migration
+class CreateEquipmentRequestTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateRequestsHasEquipmentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('requests_has_equipments', function (Blueprint $table) {
+        Schema::create('equipment_request', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('request_id')->unsigned();
-            $table->foreign('request_id')->references('id')->on('requests');
             $table->integer('equipment_id')->unsigned();
             $table->foreign('equipment_id')->references('id')->on('equipments');
+            $table->integer('request_id')->unsigned();
+            $table->foreign('request_id')->references('id')->on('requests');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateRequestsHasEquipmentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('requests_has_equipments');
+        Schema::dropIfExists('equipment_request');
     }
 }
