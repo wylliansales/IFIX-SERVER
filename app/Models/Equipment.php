@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Equipment extends Model
 {
     protected $fillable = [
-        'sector_id', 'category_id'
+        'sector_id', 'category_id', 'code', 'description'
     ];
+
+    protected $table = 'equipments';
 }

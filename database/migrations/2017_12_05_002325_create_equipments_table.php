@@ -19,6 +19,8 @@ class CreateEquipmentsTable extends Migration
             $table->foreign('sector_id')->references('id')->on('sectors');
             $table->integer('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('categories');
+            $table->string('code')->nullable();
+            $table->string('description');
             $table->timestamps();
         });
     }
