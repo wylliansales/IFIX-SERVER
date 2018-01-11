@@ -77,7 +77,7 @@ $factory->define(App\Models\Department::class, function (Faker $faker){
 
 $factory->define(App\Models\Request::class, function (Faker $faker){
     return [
-        'department_id' => random_int(1, 100),
+        'department_id' => random_int(1, 10),
         'user_id' => random_int(1, 100),
         'subject_matter' => str_random(10),
         'description' => $faker->sentence(),

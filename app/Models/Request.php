@@ -10,8 +10,8 @@ class Request extends Model
         'department_id','user_id','subject_matter', 'description'
     ];
 
-    public function equipament()
+    public function equipaments()
     {
-        return $this->belongsToMany('App\Models\Equipment');
+        return $this->belongsToMany('App\Models\Equipment', 'equipment_request');
     }
 }

@@ -11,6 +11,8 @@ class EquipmentsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\Equipment::class, 5000)->create();
+        factory(App\Models\Equipment::class, 100)->create()->each(function ($e){
+            $e->requests()->save(factory(App\Models\Request::class)->make());
+        });
     }
 }

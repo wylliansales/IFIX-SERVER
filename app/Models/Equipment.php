@@ -11,4 +11,9 @@ class Equipment extends Model
     ];
 
     protected $table = 'equipments';
+
+    public function requests()
+    {
+        return $this->belongsToMany('App\Models\Request', 'equipment_request');
+    }
 }

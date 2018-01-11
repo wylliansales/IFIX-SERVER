@@ -9,4 +9,9 @@ class Department extends Model
     protected $fillable = [
         'name', 'description'
     ];
+
+    public function attendants()
+    {
+        return $this->belongsToMany('App\Models\Attendant', 'attendant_department');
+    }
 }

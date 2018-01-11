@@ -11,8 +11,8 @@ class RequestsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\Request::class)->create()->each(function ($r){
-
+        factory(App\Models\Request::class,10)->create()->each(function ($r){
+            $r->equipaments()->save(factory(App\Models\Equipment::class)->make());
         });
     }
 }
