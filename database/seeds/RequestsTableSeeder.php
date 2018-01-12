@@ -13,6 +13,7 @@ class RequestsTableSeeder extends Seeder
     {
         factory(App\Models\Request::class,10)->create()->each(function ($r){
             $r->equipaments()->save(factory(App\Models\Equipment::class)->make());
+            $r->status()->save(factory(App\Models\Status::class)->make());
         });
     }
 }

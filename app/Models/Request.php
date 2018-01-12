@@ -14,4 +14,9 @@ class Request extends Model
     {
         return $this->belongsToMany('App\Models\Equipment', 'equipment_request');
     }
+
+    public function status()
+    {
+        return $this->belongsToMany('App\Models\Status', 'request_status');
+    }
 }
