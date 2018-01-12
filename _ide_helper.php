@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.5.23 on 2017-12-05.
+ * Generated for Laravel 5.5.23 on 2018-01-12.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -12154,6 +12154,129 @@ namespace Illuminate\Support\Facades {
  
 }
 
+namespace Cyvelnet\Laravel5Fractal\Facades { 
+
+    class Fractal {
+        
+        /**
+         * add additional meta data to transformed data.
+         *
+         * @param $key
+         * @param $data
+         * @return $this 
+         * @static 
+         */ 
+        public static function addMeta($key, $data = null)
+        {
+            return \Cyvelnet\Laravel5Fractal\FractalServices::addMeta($key, $data);
+        }
+        
+        /**
+         * transform resource collection.
+         *
+         * @param $items
+         * @param \League\Fractal\TransformerAbstract|callable|\Closure $transformer
+         * @param null $resourceKey
+         * @param \Cyvelnet\Laravel5Fractal\PaginatorInterface $adapter
+         * @return \Cyvelnet\Laravel5Fractal\Adapters\ScopeDataAdapter|mixed 
+         * @static 
+         */ 
+        public static function collection($items, $transformer, $resourceKey = null, $adapter = null)
+        {
+            return \Cyvelnet\Laravel5Fractal\FractalServices::collection($items, $transformer, $resourceKey, $adapter);
+        }
+        
+        /**
+         * excludes sub level from data transformer.
+         *
+         * @param string|array $excludes
+         * @return $this 
+         * @static 
+         */ 
+        public static function excludes($excludes)
+        {
+            return \Cyvelnet\Laravel5Fractal\FractalServices::excludes($excludes);
+        }
+        
+        /**
+         * Parse field parameter.
+         *
+         * @param array $fieldsets Array of fields to include. It must be an array
+         *                         whose keys are resource types and values a string
+         *                         of the fields to return, separated by a comma
+         * @return $this 
+         * @static 
+         */ 
+        public static function fieldsets($fieldsets = array())
+        {
+            return \Cyvelnet\Laravel5Fractal\FractalServices::fieldsets($fieldsets);
+        }
+        
+        /**
+         * 
+         *
+         * @return mixed 
+         * @static 
+         */ 
+        public static function getManager()
+        {
+            return \Cyvelnet\Laravel5Fractal\FractalServices::getManager();
+        }
+        
+        /**
+         * includes sub level data transformer.
+         *
+         * @param string|array $includes
+         * @return $this 
+         * @static 
+         */ 
+        public static function includes($includes)
+        {
+            return \Cyvelnet\Laravel5Fractal\FractalServices::includes($includes);
+        }
+        
+        /**
+         * transform a single resource.
+         *
+         * @param $item
+         * @param \League\Fractal\TransformerAbstract|callable|\Closure $transformer
+         * @param null $resourceKey
+         * @return \Cyvelnet\Laravel5Fractal\Adapters\ScopeDataAdapter|mixed 
+         * @static 
+         */ 
+        public static function item($item, $transformer, $resourceKey = null)
+        {
+            return \Cyvelnet\Laravel5Fractal\FractalServices::item($item, $transformer, $resourceKey);
+        }
+        
+        /**
+         * set data transformation recursion limit.
+         *
+         * @param $limit
+         * @return $this 
+         * @static 
+         */ 
+        public static function setRecursionLimit($limit)
+        {
+            return \Cyvelnet\Laravel5Fractal\FractalServices::setRecursionLimit($limit);
+        }
+        
+        /**
+         * set data serializer.
+         *
+         * @param \League\Fractal\Serializer\SerializerAbstract $serializer
+         * @return $this 
+         * @static 
+         */ 
+        public static function setSerializer($serializer)
+        {
+            return \Cyvelnet\Laravel5Fractal\FractalServices::setSerializer($serializer);
+        }
+         
+    }
+ 
+}
+
 
 namespace  { 
 
@@ -14264,6 +14387,8 @@ namespace  {
     class Validator extends \Illuminate\Support\Facades\Validator {}
 
     class View extends \Illuminate\Support\Facades\View {}
+
+    class Fractal extends \Cyvelnet\Laravel5Fractal\Facades\Fractal {}
  
 }
 
