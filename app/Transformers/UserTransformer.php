@@ -2,6 +2,7 @@
 
 namespace App\Transformers;
 
+use App\Models\User;
 use League\Fractal;
 use League\Fractal\TransformerAbstract;
 use League\Fractal\Resource\Collection;
@@ -27,15 +28,18 @@ class UserTransformer extends TransformerAbstract
     /**
      * Transform object into a generic array
      *
-     * @var $resource
+     * @var $user
      * @return array
      */
-    public function transform($resource)
+    public function transform(User $user)
     {
         return [
-
-            'id' => $resource->id,
-			
+            'id'        => (int) $user->id,
+			'name'      => $user->name,
+            'email'     => $user->email,
+            'activated' => $user->activated,
+            'created_at'=> $user->created_at->format('d/m/Y'),
+            'updated_at'=> $user->updated_at->format('d/m/Y'),
         ];
     }
 }
