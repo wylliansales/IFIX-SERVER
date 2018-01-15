@@ -15,4 +15,9 @@ class Attendant extends Model
     {
         return $this->belongsToMany('App\Models\Department', 'attendant_department');
     }
+
+    public function user()
+    {
+        return $this->hasOne('App\Models\User','id','user_id');
+    }
 }

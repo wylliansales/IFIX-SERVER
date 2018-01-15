@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\UserCollection;
+use App\Http\Requests\UserRequest;
+use App\Http\Resources\User as UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -15,18 +16,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        return new UserCollection(User::paginate());
+        return UserResource::collection(User::paginate());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -34,9 +26,14 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+        $user = User::create($request->all());
+        if($user){
+            return new UserResource($user);
+        } else {
+            return response()->json(['message' => 'Erro ao criar usuário'],400);
+        }
     }
 
     /**
@@ -47,19 +44,17 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        if($id < 0) {
+            return response()->json(['message'=>'ID menor que zero, por favor, informe um ID válido'], 400);
+        }
+        $user = User::find($id);
+        if($user){
+            return new UserResource($user);
+        } else {
+            return response()->json(['message'=>'O usuário com id '. $id .' não existe'],404);
+        }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -70,7 +65,13 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        if($user){
+            $user->update($request->all());
+            return new UserResource($user);
+        } else {
+            return response()->json(['message'=>'O usuário com id '. $id .' não existe'],404);
+        }
     }
 
     /**
@@ -81,6 +82,17 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if($id < 0){
+            return response()->json(['message'=>'ID inválido'],400);
+        }
+
+        $user = User::find($id);
+        if($user){
+            $user->activated = false;
+            $user->save();
+            return response()->json([],204);
+        } else {
+            return response()->json(['message'=>'Usuário com id '.$id.' não existe'],404);
+        }
     }
 }
