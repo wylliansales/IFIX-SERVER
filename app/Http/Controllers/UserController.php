@@ -16,7 +16,12 @@ class UserController extends Controller
      */
     public function index()
     {
-        return UserResource::collection(User::paginate());
+        try{
+            return UserResource::collection(User::paginate());
+        } catch(\Exception $e) {
+            return response()->json(['message'=>'Ocorreu um error no servidor, contate o administrador'],500);
+        }
+
     }
 
 
@@ -28,12 +33,17 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
-        $user = User::create($request->all());
-        if($user){
-            return new UserResource($user);
-        } else {
-            return response()->json(['message' => 'Erro ao criar usuário'],400);
+        try{
+            $user = User::create($request->all());
+            if($user){
+                return new UserResource($user);
+            } else {
+                return response()->json(['message' => 'Erro ao criar usuário'],400);
+            }
+        } catch (\Exception $e) {
+            return response()->json(['message'=>'Ocorreu um error no servidor, contate o administrador'],500);
         }
+
     }
 
     /**
@@ -44,15 +54,20 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        if($id < 0) {
-            return response()->json(['message'=>'ID menor que zero, por favor, informe um ID válido'], 400);
+        try{
+            if($id < 0) {
+                return response()->json(['message'=>'ID menor que zero, por favor, informe um ID válido'], 400);
+            }
+            $user = User::find($id);
+            if($user){
+                return new UserResource($user);
+            } else {
+                return response()->json(['message'=>'O usuário com id '. $id .' não existe'],404);
+            }
+        } catch (\Exception $e) {
+            return response()->json(['message'=>'Ocorreu um error no servidor, contate o administrador'],500);
         }
-        $user = User::find($id);
-        if($user){
-            return new UserResource($user);
-        } else {
-            return response()->json(['message'=>'O usuário com id '. $id .' não existe'],404);
-        }
+
     }
 
 
@@ -65,12 +80,16 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::find($id);
-        if($user){
-            $user->update($request->all());
-            return new UserResource($user);
-        } else {
-            return response()->json(['message'=>'O usuário com id '. $id .' não existe'],404);
+        try{
+            $user = User::find($id);
+            if($user){
+                $user->update($request->all());
+                return new UserResource($user);
+            } else {
+                return response()->json(['message'=>'O usuário com id '. $id .' não existe'],404);
+            }
+        } catch (\Exception $e) {
+            return response()->json(['message'=>'Ocorreu um error no servidor, contate o administrador'],500);
         }
     }
 
@@ -82,17 +101,22 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        if($id < 0){
-            return response()->json(['message'=>'ID inválido'],400);
+        try{
+            if($id < 0){
+                return response()->json(['message'=>'ID inválido'],400);
+            }
+
+            $user = User::find($id);
+            if($user){
+                $user->activated = false;
+                $user->save();
+                return response()->json([],204);
+            } else {
+                return response()->json(['message'=>'Usuário com id '.$id.' não existe'],404);
+            }
+        } catch (\Exception $e) {
+            return response()->json(['message'=>'Ocorreu um error no servidor, contate o administrador'],500);
         }
 
-        $user = User::find($id);
-        if($user){
-            $user->activated = false;
-            $user->save();
-            return response()->json([],204);
-        } else {
-            return response()->json(['message'=>'Usuário com id '.$id.' não existe'],404);
-        }
     }
 }
