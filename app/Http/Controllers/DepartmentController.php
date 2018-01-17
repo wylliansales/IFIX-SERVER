@@ -5,32 +5,30 @@ namespace App\Http\Controllers;
 use App\Http\Requests\DepartmentRequest;
 use App\Http\Resources\Department as DepartmentResource;
 use App\Models\Department;
-use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Foundation\Testing\TestResponse;
-use Illuminate\Http\Request;
+use App\Exceptions\Error;
+
 
 class DepartmentController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Lista os Departamentos cadastrados.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index()
     {
         try{
             return DepartmentResource::collection(Department::all());
         } catch (\Exception $e) {
-            return response()->json(['message'=>'Ocorreu um error no servidor, contate o administrador'],500);
+            return Error::getError('Error no servidor', 'Ocorreu um Error no servidor', 500);
         }
     }
 
-
     /**
-     * Store a newly created resource in storage.
+     * Cadastra Departamento no Banco de dados.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param DepartmentRequest $request
+     * @return DepartmentResource|\Illuminate\Http\JsonResponse
      */
     public function store(DepartmentRequest $request)
     {
@@ -39,70 +37,90 @@ class DepartmentController extends Controller
             if ($department) {
                 return new DepartmentResource($department);
             } else {
-                return response()->json(['message'=>'Error ao cadastrar Departamento'],400);
+                return Error::getError('Error ao cadastrar Departamento','Departamento não cadastrado',400);
             }
         } catch (\Exception $e) {
-            return response()->json(['message'=>'Ocorreu um error no servidor, contate o administrador'],500);
+            return Error::getError('Error no servidor', 'Ocorreu um Error no servidor', 500);
         }
     }
 
     /**
-     * Display the specified resource.
+     * Busca Departamento pelo ID.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return DepartmentResource|\Illuminate\Http\JsonResponse
      */
     public function show($id)
     {
         try{
             if($id < 0){
-                return response()->json(['message'=>'ID menor que zero, por favor, informe um ID válido'], 400);
+                return Error::getError('ID ivalido','ID menor que zero, por favor, informe um ID válido',400);
             }
             $department = Department::find($id);
             if($department){
                 return new DepartmentResource($department);
             } else {
-                return response()->json(['message'=>'Departamento com id '.$id.' não encontrato'],404);
+                return Error::getError('Não existe','Não existe Departamento com ID '.$id,404);
             }
         } catch(\Exception $e) {
-            return response()-> json(['message'=>'Ocorreu um error no servidor, contate o administrador'],500);
+            return Error::getError('Error no servidor', 'Ocorreu um Error no servidor', 500);
         }
     }
 
-
     /**
-     * Update the specified resource in storage.
+     * Atualiza o cadastro do Departamendo com ID informado.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param DepartmentRequest $request
+     * @param int $id
+     * @return DepartmentResource|\Illuminate\Http\JsonResponse
      */
     public function update(DepartmentRequest $request, $id)
     {
         try{
             if($id < 0){
-                return response()->json(['message'=>'ID menor que zero, por favor, informe um ID válido'], 400);
+                return Error::getError('ID ivalido','ID menor que zero, por favor, informe um ID válido',400);
             }
             $department = Department::find($id);
             if($department){
                 $department->update($request->all());
                 return new DepartmentResource($department);
             } else {
-                return response()->json(['message'=>'Não existe Departamento com ID '.$id],404);
+                return Error::getError('Não encotrato','Não existe Departamento com ID '.$id,404);
             }
         } catch (\Exception $e) {
-            return response()->json(['message'=>'Ocorreu um error no servidor'],500);
+            return Error::getError('Error no servidor', 'Ocorreu um Error no servidor', 500);
         }
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove o Departamento com ID Informado.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        try{
+            if($id < 0) {
+                return Error::getError('ID inválido','ID não pode ser menor que zero',400);
+            }
+            $department = Department::find($id);
+            if($department) {
+                try{
+                    $department->delete();
+                } catch (\Illuminate\Database\QueryException $e) {
+                    return Error::getError('Error ao excluir Departamento',
+                                            'O Departamento está relacionado à um Atendente',
+                                            500);
+                }
+
+                return response()->json([],204);
+            } else {
+                return Error::getError('Não existe','Não existe Departamento com ID '.$id,404);
+            }
+        } catch (\Exception $e) {
+            return Error::getError('Error no servidor', 'Ocorreu um Error no servidor', 500);
+        }
+
     }
 }

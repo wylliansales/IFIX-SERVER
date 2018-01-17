@@ -16,4 +16,14 @@ class Equipment extends Model
     {
         return $this->belongsToMany('App\Models\Request', 'equipment_request');
     }
+
+    public function sector()
+    {
+        return $this->belongsTo('App\Models\Sector');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo('App\Models\Category');
+    }
 }

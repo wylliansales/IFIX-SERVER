@@ -16,7 +16,12 @@ class AttendantController extends Controller
      */
     public function index()
     {
-        return AttendantResource::collection(Attendant::all());
+        try{
+            return AttendantResource::collection(Attendant::paginate());
+        } catch (\Exception $e) {
+
+        }
+
     }
 
     /**
