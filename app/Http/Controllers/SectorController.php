@@ -3,32 +3,32 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\Error;
-use App\Http\Requests\AttendantRequest;
-use App\Http\Resources\AttendantResource as AttendantResource;
-use App\Models\Attendant;
+use App\Http\Requests\SectorRequest;
+use App\Http\Resources\SectorResource as SectorResource;
+use App\Models\Sector;
 
-class AttendantController extends Controller
+class SectorController extends Controller
 {
 
     public function index()
     {
         try{
-            return AttendantResource::collection(Attendant::paginate());
+            $sector = Sector::paginate();
+            return SectorResource::collection($sector);
         } catch (\Exception $e) {
             return Error::getError('Error no servidor', 'Ocorreu um Error no servidor', 500);
         }
-
     }
 
 
-    public function store(AttendantRequest $request)
+    public function store(SectorRequest $request)
     {
         try{
-            $attendant = Attendant::create($request->all());
-            if($attendant) {
-                return new AttendantResource($attendant);
+            $sector = Sector::create($request->all());
+            if($sector){
+                return new SectorResource($sector);
             } else {
-                return Error::getError('Erro ao adicinar atendente','Atendente não cadastrado',400);
+                return Error::getError('Erro ao adicinar setor','Setor não cadastrado',400);
             }
         } catch (\Exception $e) {
             return Error::getError('Error no servidor', 'Ocorreu um Error no servidor', 500);
@@ -42,11 +42,11 @@ class AttendantController extends Controller
             if($id < 0) {
                 return Error::getError('ID inválido', 'ID não pode ser menor que zero', 400);
             }
-            $attendant = Attendant::find($id);
-            if($attendant) {
-                return new AttendantResource($attendant);
+            $sector = Sector::find($id);
+            if($sector) {
+                return new SectorResource($sector);
             } else {
-                return Error::getError('Não encontrato','Não existe atendente com ID '.$id,404);
+                return Error::getError('Não encontrato','Não existe setor com ID '.$id,404);
             }
         } catch (\Exception $e) {
             return Error::getError('Error no servidor', 'Ocorreu um Error no servidor', 500);
@@ -54,19 +54,18 @@ class AttendantController extends Controller
     }
 
 
-
-    public function update(AttendantRequest $request, $id)
+    public function update(SectorRequest $request, $id)
     {
         try{
             if($id < 0) {
                 return Error::getError('ID inválido', 'ID não pode ser menor que zero', 400);
             }
-            $attendant = Attendant::find($id);
-            if($attendant){
-                $attendant->update($request->all());
-                return new AttendantResource($attendant);
+            $sector = Sector::find($id);
+            if($sector){
+                $sector->update($request->all());
+                return new SectorResource($sector);
             } else {
-                return Error::getError('Não encontrado','Não existe atendente com ID '. $id,404);
+                return Error::getError('Não encontrado','Não existe setor com ID '. $id,404);
             }
         } catch (\Exception $e) {
             return Error::getError('Error no servidor', 'Ocorreu um Error no servidor', 500);
@@ -80,18 +79,18 @@ class AttendantController extends Controller
             if($id < 0) {
                 return Error::getError('ID inválido', 'ID não pode ser menor que zero', 400);
             }
-            $attendant = Attendant::find($id);
-            if($attendant){
+            $sector = Sector::find($id);
+            if($sector){
                 try{
-                    $attendant->delete();
+                    $sector->delete();
                 } catch (\Illuminate\Database\QueryException $e) {
-                    return Error::getError('Error ao excluir Atendente',
-                        'O Atendente está relacionada à um solicitação',
+                    return Error::getError('Error ao excluir Setor',
+                        'O Setor está relacionada à um equipamento',
                         500);
                 }
                 return response()->json([], 204);
             } else {
-                return Error::getError('Não existe', 'Não existe atendente com ID ' . $id, 404);
+                return Error::getError('Não existe', 'Não existe setor com ID ' . $id, 404);
             }
         } catch (\Exception $e) {
             return Error::getError('Error no servidor', 'Ocorreu um Error no servidor', 500);

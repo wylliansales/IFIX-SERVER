@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\Resource;
 
-class Sector extends Resource
+class DepartmentResource extends Resource
 {
     /**
      * Transform the resource into an array.
@@ -15,11 +15,10 @@ class Sector extends Resource
     public function toArray($request)
     {
         return [
-            'id'        => $this->id,
-            'name'      => $this->description,
-            'created_at'=> $this->created_at,
-            'updated_at'=> $this->updated_at,
-            'equipments'=> $this->equipments,
+            'id'            => $this->id,
+            'name'          => $this->name,
+            'description'   => $this->description,
+            'attendants'    => AttendantResource::collection($this->attendants),
         ];
     }
 }

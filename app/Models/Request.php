@@ -19,4 +19,14 @@ class Request extends Model
     {
         return $this->belongsToMany('App\Models\Status', 'request_status');
     }
+
+    public function department()
+    {
+        return $this->belongsTo('App\Models\Department');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
 }

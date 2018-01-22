@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\Resource;
 
-class Category extends Resource
+class SectorResource extends Resource
 {
     /**
      * Transform the resource into an array.
@@ -20,6 +20,7 @@ class Category extends Resource
             'description'   => $this->description,
             'created_at'    => $this->created_at->format('d/m/Y'),
             'updated_at'    => $this->updated_at->format('d/m/Y'),
+            'equipments'    => $this->equipments,
         ];
     }
 }

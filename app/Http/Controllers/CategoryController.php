@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exceptions\Error;
 use App\Http\Requests\CategoryRequest;
-use App\Http\Resources\Category as CategoryResource;
+use App\Http\Resources\CategoryResource as CategoryResource;
 use App\Models\Category;
 
 class CategoryController extends Controller
@@ -36,7 +36,7 @@ class CategoryController extends Controller
             if($category){
                 return new CategoryResource($category);
             } else {
-                return Error::getError('Erro ao adicionar categoria','Categoria não cadastrada',400);
+                return Error::getError('Erro ao adicinar categoria','Categoria não cadastrada',400);
             }
         } catch (\Exception $e) {
             return Error::getError('Error no servidor', 'Ocorreu um Error no servidor', 500);

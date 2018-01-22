@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exceptions\Error;
 use App\Http\Requests\EquipmentRequest;
-use App\Http\Resources\Equipment as EquipmentResource;
+use App\Http\Resources\EquipmentResource as EquipmentResource;
 use App\Models\Equipment;
 
 class EquipmentController extends Controller
