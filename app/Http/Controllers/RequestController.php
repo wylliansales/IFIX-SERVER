@@ -2,18 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Resources\RequestResource;
+use App\Models\Request;
+
 
 class RequestController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+        try{
+            return RequestResource::collection(Request::paginate());
+        } catch (\Exception $e) {
+            return Error::getError('Error no servidor', 'Ocorreu um Error no servidor', 500);
+        }
+
     }
 
     /**

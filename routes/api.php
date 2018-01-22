@@ -22,3 +22,4 @@ Route::resource('/attendants', 'AttendantController');
 Route::resource('/departments', 'DepartmentController');
 Route::resource('/categories','CategoryController');
 Route::resource('/equipments','EquipmentController');
+Route::resource('/requests','RequestController');
