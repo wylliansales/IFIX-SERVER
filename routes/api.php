@@ -18,7 +18,7 @@ use Illuminate\Http\Request;
 });*/
 
 Route::resource('/users', 'UserController');
-Route::resource('/attendants', 'AttendantController');
+Route::resource('/attendants', 'AttendantController')->middleware('auth:api');
 Route::resource('/departments', 'DepartmentController');
 Route::resource('/categories','CategoryController');
 Route::resource('/equipments','EquipmentController');
