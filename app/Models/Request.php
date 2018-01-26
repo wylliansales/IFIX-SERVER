@@ -2,10 +2,27 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Prettus\Repository\Contracts\Transformable;
+use Prettus\Repository\Traits\TransformableTrait;
 
-class Request extends Model
+/**
+ * Class Request.
+ * @package namespace App\Models;
+ *
+ * @property int id
+ * @property int department_id
+ * @property int user_id
+ * @property string subject_matter
+ * @property string description
+ * @property Carbon created_at
+ * @property Carbon updated_at
+ */
+class Request extends Model implements Transformable
 {
+    use TransformableTrait;
+
     protected $fillable = [
         'department_id','user_id','subject_matter', 'description'
     ];
@@ -29,4 +46,5 @@ class Request extends Model
     {
         return $this->belongsTo('App\Models\User');
     }
+
 }

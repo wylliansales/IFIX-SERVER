@@ -2,10 +2,25 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Prettus\Repository\Contracts\Transformable;
+use Prettus\Repository\Traits\TransformableTrait;
 
-class Attendant extends Model
+/**
+ * Class Attendant.
+ * @package namespace App\Models;
+ *
+ * @property int id
+ * @property int user_id
+ * @property boolean coordinator
+ * @property Carbon created_at
+ * @property Carbon updated_at
+ */
+class Attendant extends Model implements Transformable
 {
+    use TransformableTrait;
+
     protected $fillable = [
         'user_id', 'coordinator'
     ];
@@ -20,4 +35,5 @@ class Attendant extends Model
     {
         return $this->hasOne('App\Models\User','id','user_id');
     }
+
 }
