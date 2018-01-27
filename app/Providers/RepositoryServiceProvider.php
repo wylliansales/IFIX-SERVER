@@ -24,5 +24,6 @@ class RepositoryServiceProvider extends ServiceProvider
     public function register()
     {
         \App::bind('App\Repositories\UserRepository','App\Repositories\UserRepositoryEloquent');
+        \App::bind('App\Repositories\SectorRepository','App\Repositories\SectorRepositoryEloquent');
     }
 }

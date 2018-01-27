@@ -5,10 +5,18 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserRequest;
 use App\Http\Resources\User as UserResource;
 use App\Models\User;
+use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    protected $repository;
+
+    public function __construct(UserRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +25,7 @@ class UserController extends Controller
     public function index()
     {
         try{
-            return UserResource::collection(User::paginate());
+            return UserResource::collection($this->repository->paginate());
         } catch(\Exception $e) {
             return response()->json(['message'=>'Ocorreu um error no servidor, contate o administrador'],500);
         }
@@ -26,15 +34,15 @@ class UserController extends Controller
 
 
     /**
-     * Store a newly created resource in storage.
+     * Função de cadastra Usuário.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param UserRequest $request
+     * @return UserResource|\Illuminate\Http\JsonResponse
      */
     public function store(UserRequest $request)
     {
         try{
-            $user = User::create([
+            $user = $this->repository->create([
                 'name' => $request['name'],
                 'email' => $request['email'],
                 'password' => bcrypt($request['password']),
@@ -51,7 +59,7 @@ class UserController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Busca o Usuário do ID informado.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -76,7 +84,7 @@ class UserController extends Controller
 
 
     /**
-     * Update the specified resource in storage.
+     * Atualiza o cadastra do Usuário do ID informado.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -98,7 +106,7 @@ class UserController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Função que desativa usuário.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -110,7 +118,7 @@ class UserController extends Controller
                 return response()->json(['message'=>'ID inválido'],400);
             }
 
-            $user = User::find($id);
+            $user = $this->repository->find($id);
             if($user){
                 $user->activated = false;
                 $user->save();
