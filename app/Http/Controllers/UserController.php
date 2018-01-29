@@ -46,6 +46,7 @@ class UserController extends Controller
                 'name' => $request['name'],
                 'email' => $request['email'],
                 'password' => bcrypt($request['password']),
+                'scopes'    => $request['scopes']
             ]);
             if($user){
                 return new UserResource($user);
@@ -130,5 +131,14 @@ class UserController extends Controller
             return response()->json(['message'=>'Ocorreu um error no servidor, contate o administrador'],500);
         }
 
+    }
+
+    public function createToken(Request $request)
+    {
+        $user = $this->repository->findWhere(['email'=>$request->username]);
+
+        if($user)
+        $request->request->add(['scope' => $user['0']->scopes]);
+        return var_dump($request->all());
     }
 }

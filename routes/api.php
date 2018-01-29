@@ -17,7 +17,24 @@ use Illuminate\Http\Request;
     return $request->user();
 });*/
 
-Route::resource('/users', 'UserController');
+//Route::resource('/users', 'UserController');
+
+Route::post('login', 'UserController@createToken');
+
+
+Route::post('oauth/token', '\Laravel\Passport\Http\Controllers\AccessTokenController@issueToken')->middleware(\App\Http\Middleware\AddScopes::class);
+
+/*Route::group(['App' => 'Auth'], function(){
+   Route::post('login', 'ApiController@login');
+});*/
+
+
+
+Route::get('/users','UserController@index')->middleware('auth:api','scope:manage-user');
+Route::get('/users/{id}','UserController@show')->middleware('auth:api','scope:manage-user, read-only-user');
+Route::put('/users/{id}','UserController@update');
+Route::post('/users', 'UserController@store');
+
 Route::resource('/attendants', 'AttendantController')->middleware('auth:api');
 Route::resource('/departments', 'DepartmentController');
 Route::resource('/categories','CategoryController');

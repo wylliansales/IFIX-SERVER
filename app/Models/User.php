@@ -16,6 +16,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property string name
  * @property string email
  * @property string password
+ * @property boolean activeted
+ * @property Json scopes
  * @property string $remember_token
  * @property Carbon created_at
  * @property Carbon updated_at
@@ -30,7 +32,7 @@ class User extends Authenticatable implements Transformable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'activated',
+        'name', 'email', 'password','scopes',
     ];
 
     /**
@@ -40,6 +42,10 @@ class User extends Authenticatable implements Transformable
      */
     protected $hidden = [
         'password', 'remember_token',
+    ];
+
+    protected $casts = [
+        'scopes' => 'array',
     ];
 
     public function administrator()
