@@ -4,9 +4,8 @@ namespace App\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use App\Repositories\UserRepository;
 use App\Models\User;
-use App\Validators\UserValidator;
+
 
 /**
  * Class UserRepositoryEloquent.
@@ -15,6 +14,8 @@ use App\Validators\UserValidator;
  */
 class UserRepositoryEloquent extends BaseRepository implements UserRepository
 {
+
+
     /**
      * Specify Model class name
      *
@@ -25,8 +26,6 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
         return User::class;
     }
 
-    
-
     /**
      * Boot up the repository, pushing criteria
      */
@@ -34,5 +33,10 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
-    
+
+    public function findById($id)
+    {
+
+        return $this->model->find($id);
+    }
 }

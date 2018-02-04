@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->boolean('activated')->default(false);
             $table->json('scopes')->nullable();
+            $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();
         });

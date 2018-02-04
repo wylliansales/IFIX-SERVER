@@ -24,9 +24,15 @@ class AddScopes
      */
     public function handle($request, Closure $next)
     {
+        $user = $this->userRepository->findWhere(['email'=>$request->username]);
+
+        $scopes = "";
+        foreach ($user['0']->scopes as $key => $value){
+            $scopes .=  "$key ";
+        }
 
         $request->request->add([
-            "scope" => "manage-user"
+            "scope" => $scopes
         ]);
 
         return $next($request);

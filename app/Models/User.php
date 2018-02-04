@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 use Laravel\Passport\HasApiTokens;
@@ -24,29 +25,19 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  */
 class User extends Authenticatable implements Transformable
 {
-    use TransformableTrait, HasApiTokens, Notifiable;
+    use TransformableTrait, HasApiTokens, Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'email', 'password','scopes',
-    ];
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
-
-    protected $casts = [
-        'scopes' => 'array',
-    ];
+    protected $fillable = ['name', 'email', 'password'];
+    protected $hidden = ['password', 'remember_token', 'scopes'];
+    protected $guarded = ['scopes'];
+    protected $casts = ['scopes' => 'array',];
+    protected $dates = ['deleted_at'];
+    
 
     public function administrator()
     {

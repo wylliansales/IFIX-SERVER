@@ -34,5 +34,10 @@ class SectorRepositoryEloquent extends BaseRepository implements SectorRepositor
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
-    
+
+
+    public function findById($id)
+    {
+        return $this->model->find($id);
+    }
 }

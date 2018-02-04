@@ -6,18 +6,22 @@ use App\Exceptions\Error;
 use App\Http\Requests\SectorRequest;
 use App\Http\Resources\SectorResource as SectorResource;
 use App\Models\Sector;
+use App\Services\SectorService;
 
 class SectorController extends Controller
 {
 
+    private $service;
+
+    public function __construct(SectorService $service)
+    {
+        $this->service = $service;
+    }
+
+
     public function index()
     {
-        try{
-            $sector = Sector::paginate();
-            return SectorResource::collection($sector);
-        } catch (\Exception $e) {
-            return Error::getError('Error no servidor', 'Ocorreu um Error no servidor', 500);
-        }
+       return $this->service->index();
     }
 
 
@@ -85,7 +89,7 @@ class SectorController extends Controller
                     $sector->delete();
                 } catch (\Illuminate\Database\QueryException $e) {
                     return Error::getError('Error ao excluir Setor',
-                        'O Setor está relacionada à um equipamento',
+                        'O Setor está relacionado a um equipamento',
                         500);
                 }
                 return response()->json([], 204);

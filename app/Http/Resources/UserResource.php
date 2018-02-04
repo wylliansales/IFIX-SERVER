@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\Resource;
 
-class User extends Resource
+class UserResource extends Resource
 {
     /**
      * Transform the resource into an array.
@@ -19,6 +19,7 @@ class User extends Resource
             'name'      => $this->name,
             'email'     => $this->email,
             'activated' => $this->activated,
+            'scopes'    => $this->scopes,
             'created_at'    => $this->created_at->format('d/m/Y'),
             'updated_at'    => $this->updated_at->format('d/m/Y'),
         ];

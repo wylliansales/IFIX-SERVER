@@ -19,11 +19,11 @@ class Error
      * @param int $tipo
      * @return \Illuminate\Http\JsonResponse
      */
-    static function getError($message,$description,$tipo)
+    static function getError($error,$message,$tipo)
     {
         return response()->json([
-            'message'    => $message,
-            'errors'     => $description
+            'error'     => $error,
+            'message'     => $message,
             ],
             (int) $tipo
         );

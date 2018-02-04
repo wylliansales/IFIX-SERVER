@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,26 +15,41 @@ use Illuminate\Http\Request;
 /*Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });*/
-
-//Route::resource('/users', 'UserController');
-
 Route::post('login', 'UserController@createToken');
 
-
-Route::post('oauth/token', '\Laravel\Passport\Http\Controllers\AccessTokenController@issueToken')->middleware(\App\Http\Middleware\AddScopes::class);
-
-/*Route::group(['App' => 'Auth'], function(){
-   Route::post('login', 'ApiController@login');
-});*/
+Route::post('users','UserController@store');
+Route::post('oauth/token', '\Laravel\Passport\Http\Controllers\AccessTokenController@issueToken')->middleware('addScope');
 
 
+Route::middleware('auth:api')->group(function (){
 
-Route::get('/users','UserController@index')->middleware('auth:api','scope:manage-user');
-Route::get('/users/{id}','UserController@show')->middleware('auth:api','scope:manage-user, read-only-user');
-Route::put('/users/{id}','UserController@update');
-Route::post('/users', 'UserController@store');
+    Route::prefix('users')->group(function () {
+        Route::get('','UserController@index')->middleware('scope:manage-user');
+        Route::get('/{id}','UserController@show')->middleware('scope:manage-user,read-only-user');
+        Route::put('/{id}','UserController@update')->middleware('scope:manage-user, edit-only-user');
+        Route::delete('/{id}','UserController@destroy')->middleware('scope:manage-user');
+    });
 
-Route::resource('/attendants', 'AttendantController')->middleware('auth:api');
+
+
+       Route::get('/attendants','AttendantController@index')->middleware('scope:manage-attendant');
+       Route::post('/attendants', 'AttendantController@store')->middleware('scope:manage-attendant');
+       Route::get('/attendants/{id}','AttendantController@show')->middleware('scope:manage-attendant,read-only-attendant');
+       Route::put('/attendants','AttendantController@update')->middleware('scope:manage-attendant, edit-only-attendant');
+       Route::delete('/attendants','AttendantController@destroy')->middleware('scope:manage-attendant');
+
+
+    Route::prefix('sectors')->group(function () {
+        Route::get('','SectorController@index')->middleware('scope:manage-user');
+        Route::post('', 'SectorController@store')->middleware('scope:manage-user');
+        Route::get('/{id}','SectorController@show')->middleware('scope:manage-user,read-only-user');
+        Route::put('/{id}','SectorController@update')->middleware('scope:manage-user, edit-only-user');
+        Route::delete('/{id}','SectorController@destroy')->middleware('scope:manage-user');
+    });
+});
+
+
+
 Route::resource('/departments', 'DepartmentController');
 Route::resource('/categories','CategoryController');
 Route::resource('/equipments','EquipmentController');
