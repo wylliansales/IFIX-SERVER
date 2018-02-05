@@ -46,11 +46,40 @@ Route::middleware('auth:api')->group(function (){
         Route::put('/{id}','SectorController@update')->middleware('scope:manage-user, edit-only-user');
         Route::delete('/{id}','SectorController@destroy')->middleware('scope:manage-user');
     });
+
+    Route::prefix('equipments')->group(function () {
+        Route::get('','EquipmentController@index')->middleware('scope:manage-user');
+        Route::post('', 'EquipmentController@store')->middleware('scope:manage-user');
+        Route::get('/{id}','EquipmentController@show')->middleware('scope:manage-user,read-only-user');
+        Route::put('/{id}','EquipmentController@update')->middleware('scope:manage-user, edit-only-user');
+        Route::delete('/{id}','EquipmentController@destroy')->middleware('scope:manage-user');
+    });
+
+    Route::prefix('departments')->group(function () {
+        Route::get('','DepartmentController@index')->middleware('scope:manage-user');
+        Route::post('', 'DepartmentController@store')->middleware('scope:manage-user');
+        Route::get('/{id}','DepartmentController@show')->middleware('scope:manage-user,read-only-user');
+        Route::put('/{id}','DepartmentController@update')->middleware('scope:manage-user, edit-only-user');
+        Route::delete('/{id}','DepartmentController@destroy')->middleware('scope:manage-user');
+    });
+
+    Route::prefix('categories')->group(function () {
+        Route::get('','CategoryController@index')->middleware('scope:manage-user');
+        Route::post('', 'CategoryController@store')->middleware('scope:manage-user');
+        Route::get('/{id}','CategoryController@show')->middleware('scope:manage-user,read-only-user');
+        Route::put('/{id}','CategoryController@update')->middleware('scope:manage-user, edit-only-user');
+        Route::delete('/{id}','CategoryController@destroy')->middleware('scope:manage-user');
+    });
+
+    Route::prefix('requests')->group(function () {
+        Route::get('','RequestController@index')->middleware('scope:manage-user');
+        Route::get('myRequests','RequestController@myRequests');
+        Route::post('', 'RequestController@store');
+        Route::get('/{id}','RequestController@show')->middleware('scope:manage-user,read-only-user');
+        Route::put('/{id}','RequestController@update')->middleware('scope:manage-user');
+        Route::delete('/{id}','RequestController@destroy')->middleware('scope:manage-user');
+    });
+
+
+
 });
-
-
-
-Route::resource('/departments', 'DepartmentController');
-Route::resource('/categories','CategoryController');
-Route::resource('/equipments','EquipmentController');
-Route::resource('/requests','RequestController');

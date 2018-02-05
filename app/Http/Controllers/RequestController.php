@@ -4,19 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\RequestResource;
 use App\Models\Request;
+use App\Services\RequestService;
 
 
 class RequestController extends Controller
 {
 
+    private $service;
+
+    public function __construct(RequestService $service)
+    {
+        $this->service = $service;
+    }
+
     public function index()
     {
-        try{
-            return RequestResource::collection(Request::paginate());
-        } catch (\Exception $e) {
-            return Error::getError('Error no servidor', 'Ocorreu um Error no servidor', 500);
-        }
-
+        return $this->service->index();
     }
 
     /**

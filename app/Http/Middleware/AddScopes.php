@@ -27,6 +27,7 @@ class AddScopes
         $user = $this->userRepository->findWhere(['email'=>$request->username]);
 
         $scopes = "";
+        if($user['0']->scopes)
         foreach ($user['0']->scopes as $key => $value){
             $scopes .=  "$key ";
         }

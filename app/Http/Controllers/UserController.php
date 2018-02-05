@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 
 use App\Http\Requests\UserRequest;
+use App\Models\Attendant;
+use App\Repositories\AttendantRepository;
 use App\Services\UserService;
+use Illuminate\Http\Request;
 use Laravel\Passport\Passport;
 use Laravel\Passport\Token;
 
@@ -53,8 +56,9 @@ class UserController extends Controller
 
     }
 
-    public function createToken(){
-        return Token::all('user_id');
+    public function createToken(AttendantRepository $repository){
+        $attedant = $repository->paginate();
+      return $attedant;
     }
 
 }

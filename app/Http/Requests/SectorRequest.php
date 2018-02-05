@@ -3,14 +3,11 @@
 namespace App\Http\Requests;
 
 use App\Models\Attendant;
-use App\Repositories\AttendantRepository;
 use Illuminate\Foundation\Http\FormRequest;
-use Laravel\Passport\Token;
+
 
 class SectorRequest extends FormRequest
 {
-
-
 
     /**
      * Determine if the user is authorized to make this request.
@@ -19,15 +16,13 @@ class SectorRequest extends FormRequest
      */
     public function authorize()
     {
-        $attendant = Attendant::find(Token::all('user_id'));
-        dd(Token::all(['user_id']));
+        $attendant = Attendant::where('user_id', 1)->first();
 
-        if($attendant->coordinator){
+        if(!empty($attendant) && $attendant->coordinator){
             return true;
         } else {
             return false;
         }
-
     }
 
     /**

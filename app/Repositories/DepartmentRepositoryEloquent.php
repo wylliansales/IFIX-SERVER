@@ -34,5 +34,10 @@ class DepartmentRepositoryEloquent extends BaseRepository implements DepartmentR
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
+
+    public function findById($id)
+    {
+        return $this->model->find($id);
+    }
     
 }

@@ -6,21 +6,20 @@ use App\Exceptions\Error;
 use App\Http\Requests\CategoryRequest;
 use App\Http\Resources\CategoryResource as CategoryResource;
 use App\Models\Category;
+use App\Services\CategoryService;
 
 class CategoryController extends Controller
 {
-    /**
-     * Lista de Categorias cadastradas.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    private $service;
+    public function __construct(CategoryService $service)
+    {
+        $this->service = $service;
+    }
+
     public function index()
     {
-        try{
-            return CategoryResource::collection(Category::paginate());
-        } catch (\Exception $e) {
-            return Error::getError('Error no servidor', 'Ocorreu um Error no servidor', 500);
-        }
+        return $this->service->index();
     }
 
     /**

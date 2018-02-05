@@ -21,6 +21,7 @@ class CreateEquipmentsTable extends Migration
             $table->foreign('category_id')->references('id')->on('categories');
             $table->string('code')->nullable();
             $table->string('description');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

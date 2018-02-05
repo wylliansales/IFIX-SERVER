@@ -2,10 +2,13 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Attendant;
 use Illuminate\Foundation\Http\FormRequest;
 
 class EquipmentRequest extends FormRequest
 {
+
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -13,7 +16,13 @@ class EquipmentRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        $attendant = Attendant::where('user_id', $this->user()->token()->user_id)->first();
+
+        if(!empty($attendant) && $attendant->coordinator){
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -24,9 +33,7 @@ class EquipmentRequest extends FormRequest
     public function rules()
     {
         return [
-            'sector_id'     => 'required|int',
-            'category_id'   => 'required|int',
-            'description'   => 'required|min:3',
+
         ];
     }
 }

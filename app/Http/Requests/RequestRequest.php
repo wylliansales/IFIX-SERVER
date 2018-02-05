@@ -24,10 +24,7 @@ class RequestRequest extends FormRequest
     public function rules()
     {
         return [
-            'department_id' => 'required|int',
-            'user_id'       => 'required|int',
-            'subject_matter'=> 'required|min:3',
-            'description'   => 'required|min:3',
+
         ];
     }
 }

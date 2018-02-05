@@ -44,4 +44,13 @@ class User extends Authenticatable implements Transformable
         $this->hasOne('App\Models\Administrator');
     }
 
+    public function getRememberToken()
+    {
+        return $this->remember_token;
+    }
+
+    public function setRememberToken($value)
+    {
+        $this->remember_token = $value;
+    }
 }

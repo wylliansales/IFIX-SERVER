@@ -21,6 +21,7 @@ class CreateRequestsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('subject_matter');
             $table->string('description');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

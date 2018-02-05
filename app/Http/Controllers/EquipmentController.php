@@ -6,88 +6,46 @@ use App\Exceptions\Error;
 use App\Http\Requests\EquipmentRequest;
 use App\Http\Resources\EquipmentResource as EquipmentResource;
 use App\Models\Equipment;
+use App\Services\EquipmentService;
 
 class EquipmentController extends Controller
 {
-    /**
-     * Lista os Equipamentos.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    private $service;
+
+    public function __construct(EquipmentService $service)
+    {
+        $this->service = $service;
+    }
+
+
     public function index()
     {
-        try{
-            return EquipmentResource::collection(Equipment::paginate());
-        } catch (\Exception $e) {
-            return Error::getError('Error no servidor', 'Ocorreu um Error no servidor', 500);
-        }
-
+        return $this->service->index();
     }
 
-    /**
-     * Cadastra Equipamento no Banco de dados.
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     */
+
     public function store(EquipmentRequest $request)
     {
-        try{
-            $equipment = Equipment::create($request->all());
-            if($equipment){
-                return new EquipmentResource($equipment);
-            } else {
-                return Error::getError('Error ao cadastrar equipamento','Equipamento não cadastrado',400);
-            }
-        } catch (\Exception $e) {
-            return Error::getError('Error no servidor', 'Ocorreu um Error no servidor', 500);
-        }
+        return $this->service->store($request->all());
     }
 
-    /**
-     * Busca equipamento por ID.
-     *
-     * @param int $id
-     * @return EquipmentResource|\Illuminate\Http\JsonResponse
-     */
+
     public function show($id)
     {
-        try{
-            if($id < 0) {
-                return Error::getError('Id inválido','ID não pode ser menor que zero',400);
-            }
-            $equipment = Equipment::find($id);
-            if($equipment) {
-                return new EquipmentResource($equipment);
-            } else {
-                return Error::getError('Não encotrado', 'Não existe Equipamento com id '. $id,404);
-            }
-        } catch (\Exception $e) {
-            return Error::getError('Error no servidor', 'Ocorreu um Error no servidor', 500);
-        }
+        return $this->service->show($id);
     }
 
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+
+    public function update(EquipmentRequest $request, $id)
     {
-        //
+        return $this->service->update($request->all(),$id);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
-        //
+        return $this->service->destroy($id);
     }
 }

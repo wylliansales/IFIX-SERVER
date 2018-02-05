@@ -18,9 +18,10 @@ class EquipmentResource extends Resource
             'id'            => $this->id,
             'code'          => $this->code,
             'description'   => $this->description,
-            'created_at'    => $this->created_at->format('d/m/Y'),
-            'updated_at'    => $this->updated_at->format('d/m/Y'),
-            'category'      => $this->category,
+            'category'      => $this->category->name,
+            'created_at'    => optional($this->created_at)->format('d/m/Y'),
+            'updated_at'    => optional($this->updated_at)->format('d/m/Y'),
+
         ];
     }
 }

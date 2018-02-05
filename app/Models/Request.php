@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 
@@ -21,11 +22,10 @@ use Prettus\Repository\Traits\TransformableTrait;
  */
 class Request extends Model implements Transformable
 {
-    use TransformableTrait;
+    use TransformableTrait, SoftDeletes;
 
-    protected $fillable = [
-        'department_id','user_id','subject_matter', 'description'
-    ];
+    protected $fillable = ['department_id','user_id','subject_matter', 'description'];
+    protected $dates = ['deleted_at'];
 
     public function equipaments()
     {

@@ -8,6 +8,7 @@ use App\Exceptions\Error;
 use App\Http\Resources\UserResource;
 use App\Repositories\UserRepository;
 use App\Validators\UserValidator;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 
@@ -50,7 +51,8 @@ class UserService
         } catch (\Exception  $e) {
             switch (get_class($e))
             {
-                case ValidatorException::class: return $e; break;
+                case ValidatorException::class: return $e;
+                case ModelNotFoundException::class: return Error::getError(true,'Não atualizado, verifique os parâmetos',400);
                 default: return Error::getError(true,'Ocorreu um error no servidor',500);
             }
         }
@@ -91,7 +93,8 @@ class UserService
         } catch (\Exception $e){
              switch (get_class($e))
              {
-                 case ValidatorException::class: return $e; break;
+                 case ValidatorException::class: return $e;
+                 case ModelNotFoundException::class: return Error::getError(true,'Não atualizado, verifique os parâmetos',400);
                  default: return Error::getError(true,'Ocorreu um error no servidor',500);
              }
         }    
