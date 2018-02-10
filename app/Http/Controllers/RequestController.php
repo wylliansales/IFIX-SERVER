@@ -22,14 +22,9 @@ class RequestController extends Controller
         return $this->service->index();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function myRequests()
     {
-        //
+       return $this->service->myRequests();
     }
 
     /**
