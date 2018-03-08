@@ -15,7 +15,7 @@
 /*Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });*/
-Route::post('login', 'UserController@createToken');
+Route::get('login', 'UserController@createToken');
 
 Route::post('users','UserController@store');
 Route::post('oauth/token', '\Laravel\Passport\Http\Controllers\AccessTokenController@issueToken')->middleware('addScope');
@@ -80,6 +80,12 @@ Route::middleware('auth:api')->group(function (){
         Route::delete('/{id}','RequestController@destroy')->middleware('scope:manage-user');
     });
 
-
+    Route::prefix('status')->group(function () {
+        Route::get('','StatusController@index')->middleware('scope:manage-user');
+        Route::post('', 'StatusController@store')->middleware('scope:manage-user');
+        Route::get('/{id}','StatusController@show')->middleware('scope:manage-user,read-only-user');
+        Route::put('/{id}','StatusController@update')->middleware('scope:manage-user, edit-only-user');
+        Route::delete('/{id}','StatusController@destroy')->middleware('scope:manage-user');
+    });
 
 });

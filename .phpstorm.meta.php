@@ -3,7 +3,7 @@ namespace PHPSTORM_META {
 
    /**
     * PhpStorm Meta file, to provide autocomplete information for PhpStorm
-    * Generated on 2018-01-26.
+    * Generated on 2018-03-06 23:59:48.
     *
     * @author Barry vd. Heuvel <barryvdh@gmail.com>
     * @see https://github.com/barryvdh/laravel-ide-helper
@@ -41,6 +41,16 @@ namespace PHPSTORM_META {
         'view' => \Illuminate\View\Factory::class,
         'view.finder' => \Illuminate\View\FileViewFinder::class,
         'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
+        'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
+        'League\OAuth2\Server\AuthorizationServer' => \League\OAuth2\Server\AuthorizationServer::class,
+        'League\OAuth2\Server\ResourceServer' => \League\OAuth2\Server\ResourceServer::class,
+        'App\Repositories\UserRepository' => \App\Repositories\UserRepositoryEloquent::class,
+        'App\Repositories\SectorRepository' => \App\Repositories\SectorRepositoryEloquent::class,
+        'App\Repositories\EquipmentRepository' => \App\Repositories\EquipmentRepositoryEloquent::class,
+        'App\Repositories\DepartmentRepository' => \App\Repositories\DepartmentRepositoryEloquent::class,
+        'App\Repositories\CategoryRepository' => \App\Repositories\CategoryRepositoryEloquent::class,
+        'App\Repositories\RequestRepository' => \App\Repositories\RequestRepositoryEloquent::class,
+        'App\Repositories\AttendantRepository' => \App\Repositories\AttendantRepositoryEloquent::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'translation.loader' => \Illuminate\Translation\FileLoader::class,
         'translator' => \Illuminate\Translation\Translator::class,
@@ -137,6 +147,7 @@ namespace PHPSTORM_META {
         'command.ide-helper.generate' => \Barryvdh\LaravelIdeHelper\Console\GeneratorCommand::class,
         'command.ide-helper.models' => \Barryvdh\LaravelIdeHelper\Console\ModelsCommand::class,
         'command.ide-helper.meta' => \Barryvdh\LaravelIdeHelper\Console\MetaCommand::class,
+        'command.ide-helper.eloquent' => \Barryvdh\LaravelIdeHelper\Console\EloquentCommand::class,
         'command.tinker' => \Laravel\Tinker\Console\TinkerCommand::class,
     ]));
     override(\Illuminate\Contracts\Container\Container::make(0), map([
@@ -172,6 +183,16 @@ namespace PHPSTORM_META {
         'view' => \Illuminate\View\Factory::class,
         'view.finder' => \Illuminate\View\FileViewFinder::class,
         'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
+        'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
+        'League\OAuth2\Server\AuthorizationServer' => \League\OAuth2\Server\AuthorizationServer::class,
+        'League\OAuth2\Server\ResourceServer' => \League\OAuth2\Server\ResourceServer::class,
+        'App\Repositories\UserRepository' => \App\Repositories\UserRepositoryEloquent::class,
+        'App\Repositories\SectorRepository' => \App\Repositories\SectorRepositoryEloquent::class,
+        'App\Repositories\EquipmentRepository' => \App\Repositories\EquipmentRepositoryEloquent::class,
+        'App\Repositories\DepartmentRepository' => \App\Repositories\DepartmentRepositoryEloquent::class,
+        'App\Repositories\CategoryRepository' => \App\Repositories\CategoryRepositoryEloquent::class,
+        'App\Repositories\RequestRepository' => \App\Repositories\RequestRepositoryEloquent::class,
+        'App\Repositories\AttendantRepository' => \App\Repositories\AttendantRepositoryEloquent::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'translation.loader' => \Illuminate\Translation\FileLoader::class,
         'translator' => \Illuminate\Translation\Translator::class,
@@ -268,6 +289,7 @@ namespace PHPSTORM_META {
         'command.ide-helper.generate' => \Barryvdh\LaravelIdeHelper\Console\GeneratorCommand::class,
         'command.ide-helper.models' => \Barryvdh\LaravelIdeHelper\Console\ModelsCommand::class,
         'command.ide-helper.meta' => \Barryvdh\LaravelIdeHelper\Console\MetaCommand::class,
+        'command.ide-helper.eloquent' => \Barryvdh\LaravelIdeHelper\Console\EloquentCommand::class,
         'command.tinker' => \Laravel\Tinker\Console\TinkerCommand::class,
     ]));
     override(\Illuminate\Contracts\Container\Container::makeWith(0), map([
@@ -303,6 +325,16 @@ namespace PHPSTORM_META {
         'view' => \Illuminate\View\Factory::class,
         'view.finder' => \Illuminate\View\FileViewFinder::class,
         'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
+        'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
+        'League\OAuth2\Server\AuthorizationServer' => \League\OAuth2\Server\AuthorizationServer::class,
+        'League\OAuth2\Server\ResourceServer' => \League\OAuth2\Server\ResourceServer::class,
+        'App\Repositories\UserRepository' => \App\Repositories\UserRepositoryEloquent::class,
+        'App\Repositories\SectorRepository' => \App\Repositories\SectorRepositoryEloquent::class,
+        'App\Repositories\EquipmentRepository' => \App\Repositories\EquipmentRepositoryEloquent::class,
+        'App\Repositories\DepartmentRepository' => \App\Repositories\DepartmentRepositoryEloquent::class,
+        'App\Repositories\CategoryRepository' => \App\Repositories\CategoryRepositoryEloquent::class,
+        'App\Repositories\RequestRepository' => \App\Repositories\RequestRepositoryEloquent::class,
+        'App\Repositories\AttendantRepository' => \App\Repositories\AttendantRepositoryEloquent::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'translation.loader' => \Illuminate\Translation\FileLoader::class,
         'translator' => \Illuminate\Translation\Translator::class,
@@ -399,6 +431,7 @@ namespace PHPSTORM_META {
         'command.ide-helper.generate' => \Barryvdh\LaravelIdeHelper\Console\GeneratorCommand::class,
         'command.ide-helper.models' => \Barryvdh\LaravelIdeHelper\Console\ModelsCommand::class,
         'command.ide-helper.meta' => \Barryvdh\LaravelIdeHelper\Console\MetaCommand::class,
+        'command.ide-helper.eloquent' => \Barryvdh\LaravelIdeHelper\Console\EloquentCommand::class,
         'command.tinker' => \Laravel\Tinker\Console\TinkerCommand::class,
     ]));
     override(\App::make(0), map([
@@ -434,6 +467,16 @@ namespace PHPSTORM_META {
         'view' => \Illuminate\View\Factory::class,
         'view.finder' => \Illuminate\View\FileViewFinder::class,
         'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
+        'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
+        'League\OAuth2\Server\AuthorizationServer' => \League\OAuth2\Server\AuthorizationServer::class,
+        'League\OAuth2\Server\ResourceServer' => \League\OAuth2\Server\ResourceServer::class,
+        'App\Repositories\UserRepository' => \App\Repositories\UserRepositoryEloquent::class,
+        'App\Repositories\SectorRepository' => \App\Repositories\SectorRepositoryEloquent::class,
+        'App\Repositories\EquipmentRepository' => \App\Repositories\EquipmentRepositoryEloquent::class,
+        'App\Repositories\DepartmentRepository' => \App\Repositories\DepartmentRepositoryEloquent::class,
+        'App\Repositories\CategoryRepository' => \App\Repositories\CategoryRepositoryEloquent::class,
+        'App\Repositories\RequestRepository' => \App\Repositories\RequestRepositoryEloquent::class,
+        'App\Repositories\AttendantRepository' => \App\Repositories\AttendantRepositoryEloquent::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'translation.loader' => \Illuminate\Translation\FileLoader::class,
         'translator' => \Illuminate\Translation\Translator::class,
@@ -530,6 +573,7 @@ namespace PHPSTORM_META {
         'command.ide-helper.generate' => \Barryvdh\LaravelIdeHelper\Console\GeneratorCommand::class,
         'command.ide-helper.models' => \Barryvdh\LaravelIdeHelper\Console\ModelsCommand::class,
         'command.ide-helper.meta' => \Barryvdh\LaravelIdeHelper\Console\MetaCommand::class,
+        'command.ide-helper.eloquent' => \Barryvdh\LaravelIdeHelper\Console\EloquentCommand::class,
         'command.tinker' => \Laravel\Tinker\Console\TinkerCommand::class,
     ]));
     override(\App::makeWith(0), map([
@@ -565,6 +609,16 @@ namespace PHPSTORM_META {
         'view' => \Illuminate\View\Factory::class,
         'view.finder' => \Illuminate\View\FileViewFinder::class,
         'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
+        'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
+        'League\OAuth2\Server\AuthorizationServer' => \League\OAuth2\Server\AuthorizationServer::class,
+        'League\OAuth2\Server\ResourceServer' => \League\OAuth2\Server\ResourceServer::class,
+        'App\Repositories\UserRepository' => \App\Repositories\UserRepositoryEloquent::class,
+        'App\Repositories\SectorRepository' => \App\Repositories\SectorRepositoryEloquent::class,
+        'App\Repositories\EquipmentRepository' => \App\Repositories\EquipmentRepositoryEloquent::class,
+        'App\Repositories\DepartmentRepository' => \App\Repositories\DepartmentRepositoryEloquent::class,
+        'App\Repositories\CategoryRepository' => \App\Repositories\CategoryRepositoryEloquent::class,
+        'App\Repositories\RequestRepository' => \App\Repositories\RequestRepositoryEloquent::class,
+        'App\Repositories\AttendantRepository' => \App\Repositories\AttendantRepositoryEloquent::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'translation.loader' => \Illuminate\Translation\FileLoader::class,
         'translator' => \Illuminate\Translation\Translator::class,
@@ -661,6 +715,7 @@ namespace PHPSTORM_META {
         'command.ide-helper.generate' => \Barryvdh\LaravelIdeHelper\Console\GeneratorCommand::class,
         'command.ide-helper.models' => \Barryvdh\LaravelIdeHelper\Console\ModelsCommand::class,
         'command.ide-helper.meta' => \Barryvdh\LaravelIdeHelper\Console\MetaCommand::class,
+        'command.ide-helper.eloquent' => \Barryvdh\LaravelIdeHelper\Console\EloquentCommand::class,
         'command.tinker' => \Laravel\Tinker\Console\TinkerCommand::class,
     ]));
     override(\app(0), map([
@@ -696,6 +751,16 @@ namespace PHPSTORM_META {
         'view' => \Illuminate\View\Factory::class,
         'view.finder' => \Illuminate\View\FileViewFinder::class,
         'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
+        'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
+        'League\OAuth2\Server\AuthorizationServer' => \League\OAuth2\Server\AuthorizationServer::class,
+        'League\OAuth2\Server\ResourceServer' => \League\OAuth2\Server\ResourceServer::class,
+        'App\Repositories\UserRepository' => \App\Repositories\UserRepositoryEloquent::class,
+        'App\Repositories\SectorRepository' => \App\Repositories\SectorRepositoryEloquent::class,
+        'App\Repositories\EquipmentRepository' => \App\Repositories\EquipmentRepositoryEloquent::class,
+        'App\Repositories\DepartmentRepository' => \App\Repositories\DepartmentRepositoryEloquent::class,
+        'App\Repositories\CategoryRepository' => \App\Repositories\CategoryRepositoryEloquent::class,
+        'App\Repositories\RequestRepository' => \App\Repositories\RequestRepositoryEloquent::class,
+        'App\Repositories\AttendantRepository' => \App\Repositories\AttendantRepositoryEloquent::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'translation.loader' => \Illuminate\Translation\FileLoader::class,
         'translator' => \Illuminate\Translation\Translator::class,
@@ -792,6 +857,7 @@ namespace PHPSTORM_META {
         'command.ide-helper.generate' => \Barryvdh\LaravelIdeHelper\Console\GeneratorCommand::class,
         'command.ide-helper.models' => \Barryvdh\LaravelIdeHelper\Console\ModelsCommand::class,
         'command.ide-helper.meta' => \Barryvdh\LaravelIdeHelper\Console\MetaCommand::class,
+        'command.ide-helper.eloquent' => \Barryvdh\LaravelIdeHelper\Console\EloquentCommand::class,
         'command.tinker' => \Laravel\Tinker\Console\TinkerCommand::class,
     ]));
     override(\resolve(0), map([
@@ -827,6 +893,16 @@ namespace PHPSTORM_META {
         'view' => \Illuminate\View\Factory::class,
         'view.finder' => \Illuminate\View\FileViewFinder::class,
         'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
+        'Asm89\Stack\CorsService' => \Asm89\Stack\CorsService::class,
+        'League\OAuth2\Server\AuthorizationServer' => \League\OAuth2\Server\AuthorizationServer::class,
+        'League\OAuth2\Server\ResourceServer' => \League\OAuth2\Server\ResourceServer::class,
+        'App\Repositories\UserRepository' => \App\Repositories\UserRepositoryEloquent::class,
+        'App\Repositories\SectorRepository' => \App\Repositories\SectorRepositoryEloquent::class,
+        'App\Repositories\EquipmentRepository' => \App\Repositories\EquipmentRepositoryEloquent::class,
+        'App\Repositories\DepartmentRepository' => \App\Repositories\DepartmentRepositoryEloquent::class,
+        'App\Repositories\CategoryRepository' => \App\Repositories\CategoryRepositoryEloquent::class,
+        'App\Repositories\RequestRepository' => \App\Repositories\RequestRepositoryEloquent::class,
+        'App\Repositories\AttendantRepository' => \App\Repositories\AttendantRepositoryEloquent::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'translation.loader' => \Illuminate\Translation\FileLoader::class,
         'translator' => \Illuminate\Translation\Translator::class,
@@ -923,6 +999,7 @@ namespace PHPSTORM_META {
         'command.ide-helper.generate' => \Barryvdh\LaravelIdeHelper\Console\GeneratorCommand::class,
         'command.ide-helper.models' => \Barryvdh\LaravelIdeHelper\Console\ModelsCommand::class,
         'command.ide-helper.meta' => \Barryvdh\LaravelIdeHelper\Console\MetaCommand::class,
+        'command.ide-helper.eloquent' => \Barryvdh\LaravelIdeHelper\Console\EloquentCommand::class,
         'command.tinker' => \Laravel\Tinker\Console\TinkerCommand::class,
     ]));
 
@@ -954,5 +1031,6 @@ namespace PHPSTORM_META {
     override(\head(0), elementType(0));
     override(\last(0), elementType(0));
     override(\with(0), type(0));
+    override(\tap(0), type(0));
 
 }

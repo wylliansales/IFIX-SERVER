@@ -30,5 +30,6 @@ class RepositoryServiceProvider extends ServiceProvider
         \App::bind('App\Repositories\CategoryRepository','App\Repositories\CategoryRepositoryEloquent');
         \App::bind('App\Repositories\RequestRepository','App\Repositories\RequestRepositoryEloquent');
         \App::bind('App\Repositories\AttendantRepository','App\Repositories\AttendantRepositoryEloquent');
+        \App::bind('App\Repositories\StatusRepository','App\Repositories\StatusRepositoryEloquent');
     }
 }
