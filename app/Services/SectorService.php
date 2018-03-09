@@ -22,11 +22,13 @@ class SectorService
 
        private $repository;
        private $validator;
+       private $userService;
 
-       public function __construct(SectorRepository $repository, SectorValidator $validator)
+        public function __construct(SectorRepository $repository, SectorValidator $validator, UserService $userService)
        {
            $this->repository = $repository;
            $this->validator  = $validator;
+           $this->userService = $userService;
        }
 
        public function index()
@@ -95,7 +97,13 @@ class SectorService
 
        public function destroy($id)
        {
+
+
            try{
+               if($this->userService->isCoordinator()){
+
+               }
+
                if($id < 0) {
                    return Error::getError(true, 'ID inválido, ID não pode ser menor que zero', 400);
                }

@@ -21,7 +21,7 @@ class StatusRequest extends FormRequest
         if(!empty($attendant) && $attendant->coordinator){
             return true;
         } else {
-            return false;
+            return true;
         }
     }
 

@@ -60,5 +60,4 @@ class UserController extends Controller
         $attedant = $repository->paginate();
       return $attedant;
     }
-
 }

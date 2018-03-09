@@ -21,22 +21,20 @@ class RequestService
 {
 
     private $repository;
-    private $attendantRepository;
     private $validator;
+    private $userService;
 
-    public function __construct(RequestValidator $validator, RequestRepository $repository, AttendantRepository $attendantRepository)
+    public function __construct(RequestValidator $validator, RequestRepository $repository, UserService $userService)
     {
         $this->validator            = $validator;
         $this->repository           = $repository;
-        $this->attendantRepository   = $attendantRepository;
+        $this->userService          = $userService;
     }
 
     public function index()
     {
         try{
-
-            $attendant = $this->attendantRepository->findWhere(['user_id' => \Auth::user()->token()->user_id]);
-            if($attendant['0']->coordinator){
+            if($this->userService->loginIsCoordinator()){
                 return RequestResource::collection($this->repository->paginate());
             } else {
                 return Error::getError(true,'Você não tem permissão para essa ação',400);

@@ -6,6 +6,7 @@ namespace App\Services;
 
 use App\Exceptions\Error;
 use App\Http\Resources\UserResource;
+use App\Repositories\AttendantRepository;
 use App\Repositories\UserRepository;
 use App\Validators\UserValidator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -18,11 +19,13 @@ class UserService
 
     private $repository;
     private $validator;
+    private $attendantRepository;
 
-    public function __construct(UserRepository $repository, UserValidator $validator)
+    public function __construct(UserRepository $repository, UserValidator $validator, AttendantRepository $attendantRepository)
     {
         $this->repository = $repository;
         $this->validator = $validator;
+        $this->$attendantRepository = $attendantRepository;
     }
 
 
@@ -115,6 +118,21 @@ class UserService
         } catch (\Exception $e) {
             return Error::getError(true,'Ocorreu um error no servidor',500);
         }
+    }
+
+    public function loginIsCoordinator($user_id){
+        try{
+            $attendant = $this->attendantRepository->findWhere(['user_id' => \Auth::user()->token()->user_id]);
+
+            if($attendant['0']->coordinator){
+                return true;
+            } else {
+                return false;
+            }
+        } catch (\Exception $e) {
+            return Error::getError(true,'Ocorreu um error no servidor',500);
+        }
+
     }
 
 }
