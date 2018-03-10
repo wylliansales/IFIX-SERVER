@@ -107,4 +107,20 @@ class AttendantService
         }
     }
 
+    public function isCoordinator(){
+        try{
+            $attendant = $this->repository->findWhere(['user_id' => \Auth::user()->token()->user_id]);
+
+            if($attendant['0']->coordinator){
+                return true;
+            } else {
+                return false;
+            }
+        } catch (\Exception $e) {
+            return Error::getError(true,'Ocorreu um error no servidor',500);
+        }
+
+    }
+
+
 }

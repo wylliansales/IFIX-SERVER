@@ -19,9 +19,7 @@ class UserController extends Controller
 
     public function __construct(UserService $service)
     {
-       $data = $this->service = $service;
-
-       return $data;
+       $this->service = $service;
     }
 
 
@@ -59,5 +57,9 @@ class UserController extends Controller
     public function createToken(AttendantRepository $repository){
         $attedant = $repository->paginate();
       return $attedant;
+    }
+
+    public function loginIsCoordinator($user_id){
+        return $this->service->loginIsCoordinator($user_id);
     }
 }

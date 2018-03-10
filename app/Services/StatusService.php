@@ -8,9 +8,8 @@
 
 namespace App\Services;
 
-
 use App\Exceptions\Error;
-use App\Http\Resources\SectorResource;
+use App\Http\Resources\StatusResource;
 use App\Repositories\StatusRepository;
 use App\Validators\StatusValidator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -32,7 +31,7 @@ class StatusService
        public function index()
        {
            try{
-               return SectorResource::collection($this->repository->paginate(7));
+               return StatusResource::collection($this->repository->paginate(7));
            } catch (\Exception $e) {
                return Error::getError(true,'Ocorreu um error no servidor',500);
            }
@@ -44,7 +43,7 @@ class StatusService
                $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
 
                $user = $this->repository->create($data);
-               return new SectorResource($user);
+               return new StatusResource($user);
 
            } catch (\Exception $e) {
                switch (get_class($e))
@@ -63,7 +62,7 @@ class StatusService
                }
                $sector = $this->repository->findById($id);
                if($sector) {
-                   return new SectorResource($sector);
+                   return new StatusResource($sector);
                } else {
                    return Error::getError(true,'Não existe setor com ID '.$id,404);
                }
@@ -81,7 +80,7 @@ class StatusService
                $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
                $sector = $this->repository->update($data,$id);
-               return new SectorResource($sector);
+               return new StatusResource($sector);
 
            } catch (\Exception $e) {
                switch (get_class($e))

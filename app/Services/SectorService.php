@@ -10,6 +10,7 @@ namespace App\Services;
 
 
 use App\Exceptions\Error;
+use App\Services\UserService;
 use App\Http\Resources\SectorResource;
 use App\Repositories\SectorRepository;
 use App\Validators\SectorValidator;
@@ -22,19 +23,19 @@ class SectorService
 
        private $repository;
        private $validator;
-       private $userService;
+       private $attendantService;
 
-        public function __construct(SectorRepository $repository, SectorValidator $validator, UserService $userService)
+        public function __construct(SectorRepository $repository, SectorValidator $validator, UserService $attendantService)
        {
            $this->repository = $repository;
            $this->validator  = $validator;
-           $this->userService = $userService;
+           $this->attendantService = $attendantService;
        }
 
        public function index()
        {
            try{
-               return SectorResource::collection($this->repository->paginate());
+               return SectorResource::collection($this->repository->paginate(7));
            } catch (\Exception $e) {
                return Error::getError(true,'Ocorreu um error no servidor',500);
            }
@@ -97,13 +98,7 @@ class SectorService
 
        public function destroy($id)
        {
-
-
            try{
-               if($this->userService->isCoordinator()){
-
-               }
-
                if($id < 0) {
                    return Error::getError(true, 'ID inválido, ID não pode ser menor que zero', 400);
                }

@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Exceptions\Error;
 use App\Http\Requests\SectorRequest;
-use App\Http\Resources\SectorResource as SectorResource;
-use App\Models\Sector;
 use App\Services\SectorService;
 
 class SectorController extends Controller

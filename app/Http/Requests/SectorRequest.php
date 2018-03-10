@@ -16,7 +16,7 @@ class SectorRequest extends FormRequest
      */
     public function authorize()
     {
-        $attendant = Attendant::where('user_id', 1)->first();
+        $attendant = Attendant::where('user_id', \Auth::user()->token()->user_id)->first();
 
         if(!empty($attendant) && $attendant->coordinator){
             return true;
