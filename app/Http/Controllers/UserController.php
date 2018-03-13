@@ -62,4 +62,25 @@ class UserController extends Controller
     public function loginIsCoordinator($user_id){
         return $this->service->loginIsCoordinator($user_id);
     }
+
+    public function blocked()
+    {
+        return $this->service->blocked();
+    }
+
+    public function released()
+    {
+        return $this->service->released();
+    }
+
+    public function releaseUser(Request $request, $id)
+    {
+        return $this->service->releaseUser($request->all(), $id);
+    }
+
+    public function blockUser(Request $request, $id)
+    {
+        return $this->service->blockUser($request->all(), $id);
+    }
+
 }

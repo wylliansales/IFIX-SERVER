@@ -32,7 +32,7 @@ class User extends Authenticatable implements Transformable
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password'];
+    protected $fillable = ['name', 'email', 'password', ];
     protected $hidden = ['password', 'remember_token', 'scopes'];
     protected $guarded = ['scopes'];
     protected $casts = ['scopes' => 'array',];

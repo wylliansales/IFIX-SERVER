@@ -116,4 +116,51 @@ class UserService
             return Error::getError(true,'Ocorreu um error no servidor',500);
         }
     }
+
+    public function blocked()
+    {
+        try {
+            $users = $this->repository->findByField('activated', '0');
+            return UserResource::collection($users);
+        } catch (\Exception $e) {
+            return Error::getError(true, 'Ocorreu um error no servidor', 500);
+        }
+    }
+
+    public function released()
+    {
+        try {
+            $users = $this->repository->findByField('activated', '1');
+
+            return UserResource::collection($users);
+
+        } catch (\Exception $e) {
+            return Error::getError(true, 'Ocorreu um error no servidor', 500);
+        }
+
+    }
+
+    public function releaseUser(array $data, $id)
+    {
+        try{
+            $user = $this->repository->find($id);
+            $user->activated = true;
+            $this->repository->save($user);
+            return new UserResource($user);
+        } catch (\Exception $e) {
+            return Error::getError(true, 'Ocorreu um error no servidor', 500);
+        }
+    }
+
+    public function blockUser(array $data, $id)
+    {
+        try{
+            $user = $this->repository->find($id);
+            $user->activated = false;
+            $this->repository->save($user);
+            return new UserResource($user);
+        } catch (\Exception $e) {
+            return Error::getError(true, 'Ocorreu um error no servidor', 500);
+        }
+    }
 }

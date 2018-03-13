@@ -25,8 +25,12 @@ Route::middleware('auth:api')->group(function (){
 
     Route::prefix('users')->group(function () {
         Route::get('','UserController@index')->middleware('scope:manage-user');
+        Route::get('/blocked','UserController@blocked')->middleware('scope:manage-user');
+        Route::get('/released','UserController@released')->middleware('scope:manage-user');
         Route::get('/{id}','UserController@show')->middleware('scope:manage-user,read-only-user');
         Route::put('/{id}','UserController@update')->middleware('scope:manage-user, edit-only-user');
+        Route::put('/release/{id}','UserController@releaseUser')->middleware('scope:manage-user');
+        Route::put('/block/{id}','UserController@blockUser')->middleware('scope:manage-user');
         Route::delete('/{id}','UserController@destroy')->middleware('scope:manage-user');
     });
 

@@ -39,4 +39,8 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
 
         return $this->model->find($id);
     }
+
+    public function save(User $user){
+        $user->save();
+    }
 }
