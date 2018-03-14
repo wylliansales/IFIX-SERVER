@@ -17,8 +17,7 @@ class DepartmentResource extends Resource
         return [
             'id'            => $this->id,
             'name'          => $this->name,
-            'description'   => $this->description,
-            'attendants'    => AttendantResource::collection($this->attendants),
+            'description'   => $this->description
         ];
     }
 }

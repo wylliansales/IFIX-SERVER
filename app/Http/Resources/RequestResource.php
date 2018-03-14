@@ -14,6 +14,14 @@ class RequestResource extends Resource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'id'                => $this->id,
+            'subject_matter'    => $this->subject_matter,
+            'department'        => $this->department->name,
+            'user'              => $this->user->name,
+            'attendant'         => optional($this->attendant)->name,
+            'finalized'         => $this->finalized,
+            'created_at'        => optional($this->created_at)->format('d/m/Y'),
+        ];
     }
 }

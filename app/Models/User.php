@@ -44,6 +44,17 @@ class User extends Authenticatable implements Transformable
         $this->hasOne('App\Models\Administrator');
     }
 
+    public function requests()
+    {
+        return $this->hasMany('App\Models\Request');
+    }
+
+    public function attendant()
+    {
+        return $this->hasOne('App\Models\Attendant');
+    }
+
+
     public function getRememberToken()
     {
         return $this->remember_token;

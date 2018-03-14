@@ -36,7 +36,7 @@ Route::middleware('auth:api')->group(function (){
 
 
 
-       Route::get('/attendants','AttendantController@index')->middleware('scope:manage-attendant');
+       Route::get('/attendants','AttendantController@index')->middleware('scope:manage-user');
        Route::post('/attendants', 'AttendantController@store')->middleware('scope:manage-attendant');
        Route::get('/attendants/{id}','AttendantController@show')->middleware('scope:manage-attendant,read-only-attendant');
        Route::put('/attendants','AttendantController@update')->middleware('scope:manage-attendant, edit-only-attendant');
@@ -77,6 +77,10 @@ Route::middleware('auth:api')->group(function (){
 
     Route::prefix('requests')->group(function () {
         Route::get('','RequestController@index')->middleware('scope:manage-user');
+        Route::get('news','RequestController@newsRequests')->middleware('scope:manage-user,read-only-user');
+        Route::get('open','RequestController@openRequests')->middleware('scope:manage-user,read-only-user');
+        Route::get('linked','RequestController@linkedRequests')->middleware('scope:manage-user,read-only-user');
+        Route::get('closed','RequestController@closedRequests')->middleware('scope:manage-user,read-only-user');
         Route::get('myRequests','RequestController@myRequests');
         Route::post('', 'RequestController@store');
         Route::get('/{id}','RequestController@show')->middleware('scope:manage-user,read-only-user');

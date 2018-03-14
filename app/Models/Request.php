@@ -24,8 +24,9 @@ class Request extends Model implements Transformable
 {
     use TransformableTrait, SoftDeletes;
 
-    protected $fillable = ['department_id','user_id','subject_matter', 'description'];
+    protected $fillable = ['department_id','user_id', 'attendant_id', 'subject_matter', 'description', 'finalized'];
     protected $dates = ['deleted_at'];
+    protected $hidden = ['deleted_at'];
 
     public function equipaments()
     {
@@ -47,4 +48,8 @@ class Request extends Model implements Transformable
         return $this->belongsTo('App\Models\User');
     }
 
+    public function attendant()
+    {
+        return $this->belongsTo('App\Models\Attendant', 'attendant_id','id' );
+    }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\RequestResource;
 use App\Models\Request;
 use App\Services\RequestService;
 
@@ -81,5 +80,15 @@ class RequestController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function newsRequests()
+    {
+        return $this->service->newsRequests();
+    }
+
+    public function openRequests()
+    {
+        return $this->service->openRequests();
     }
 }

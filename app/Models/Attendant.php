@@ -33,7 +33,7 @@ class Attendant extends Model implements Transformable
 
     public function user()
     {
-        return $this->hasOne('App\Models\User','id','user_id');
+        return $this->belongsTo('App\Models\User');
     }
 
 }

@@ -10,8 +10,9 @@ namespace App\Services;
 
 
 use App\Exceptions\Error;
+use App\Http\Resources\RequestCollection;
 use App\Http\Resources\RequestResource;
-use App\Repositories\AttendantRepository;
+use App\Models\Request;
 use App\Repositories\RequestRepository;
 use App\Validators\RequestValidator;
 use Prettus\Validator\Contracts\ValidatorInterface;
@@ -22,32 +23,21 @@ class RequestService
 
     private $repository;
     private $validator;
-    private $userService;
 
-    public function __construct(RequestValidator $validator, RequestRepository $repository, UserService $userService)
+    public function __construct(RequestValidator $validator, RequestRepository $repository)
     {
         $this->validator            = $validator;
         $this->repository           = $repository;
-        $this->userService          = $userService;
     }
 
     public function index()
     {
         try{
-            if($this->userService->loginIsCoordinator()){
-                return RequestResource::collection($this->repository->paginate());
-            } else {
-                return Error::getError(true,'Você não tem permissão para essa ação',400);
-            }
+             return RequestResource::collection($this->repository->paginate());
 
         } catch (\Exception $e) {
             return Error::getError(true,'Ocorreu um error no servidor',500);
         }
-    }
-
-    public function myRequests()
-    {
-
     }
 
     public function store($data)
@@ -124,5 +114,24 @@ class RequestService
         }
     }
 
+    public function newsRequests()
+    {
+        try{
+            $requests = $this->repository->findWhere(['attendant_id' => null, 'finalized'=> '0']);
+            return RequestResource::collection($requests);
+        } catch(\Exception $e) {
+            return Error::getError(true,'Ocorreu um error no servidor',500);
+        }
+    }
+
+    public function openRequests()
+    {
+        try{
+            $requests = $this->repository->findWhere(['finalized'=> '1']);
+            return RequestResource::collection($requests);
+        } catch(\Exception $e) {
+            return Error::getError(true,'Ocorreu um error no servidor',500);
+        }
+    }
 
 }
