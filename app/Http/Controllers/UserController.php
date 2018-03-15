@@ -83,4 +83,9 @@ class UserController extends Controller
         return $this->service->blockUser($request->all(), $id);
     }
 
+    public function getUserLogin()
+    {
+        return $this->service->getUserLogin();
+    }
+
 }

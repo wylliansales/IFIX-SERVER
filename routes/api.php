@@ -1,24 +1,9 @@
 <?php
 
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-
-/*Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});*/
-Route::get('login', 'UserController@createToken');
 
 Route::post('users','UserController@store');
-Route::post('oauth/token', '\Laravel\Passport\Http\Controllers\AccessTokenController@issueToken')->middleware('addScope');
+Route::post('oauth/token', '\Laravel\Passport\Http\Controllers\AccessTokenController@issueToken')->middleware('addScope', 'check.user');
 
 
 Route::middleware('auth:api')->group(function (){
@@ -29,6 +14,7 @@ Route::middleware('auth:api')->group(function (){
         Route::get('/released','UserController@released')->middleware('scope:manage-user');
         Route::get('/{id}','UserController@show')->middleware('scope:manage-user,read-only-user');
         Route::put('/{id}','UserController@update')->middleware('scope:manage-user, edit-only-user');
+        Route::put('/userlogin','UserController@getUserLogin');
         Route::put('/release/{id}','UserController@releaseUser')->middleware('scope:manage-user');
         Route::put('/block/{id}','UserController@blockUser')->middleware('scope:manage-user');
         Route::delete('/{id}','UserController@destroy')->middleware('scope:manage-user');

@@ -163,4 +163,16 @@ class UserService
             return Error::getError(true, 'Ocorreu um error no servidor', 500);
         }
     }
+
+    public function getUserLogin()
+    {
+        try{
+            $user = $this->repository->findById(\Auth::user()->token()->user_id);
+            return new UserResource($user);
+
+        } catch(\Exception $e) {
+            return Error::getError(true,'Ocorreu um error no servidor',500);
+        }
+    }
+
 }
