@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\Resource;
 
-class RequestResource extends Resource
+class Request extends Resource
 {
     /**
      * Transform the resource into an array.
@@ -17,11 +17,15 @@ class RequestResource extends Resource
         return [
             'id'                => $this->id,
             'subject_matter'    => $this->subject_matter,
-            'department'        => $this->department->name,
-            'user'              => $this->user->name,
-            'attendant'         => !empty($this->attendant_id)? $this->attendant->user->name: null,
+            'description'       => $this->description,
+            'department'        =>  new DepartmentResource($this->department),
+            'user'              =>  new UserResource($this->user),
+            'attendant'         =>  new AttendantResource($this->attendant),
+            'equipaments'       =>  EquipmentResource::collection($this->equipaments),
+            'status'            =>  StatusResource::collection($this->status),
             'finalized'         => $this->finalized,
             'created_at'        => optional($this->created_at)->format('d/m/Y H:i'),
+
         ];
     }
 }

@@ -12,6 +12,7 @@ class CategoryController extends Controller
 {
 
     private $service;
+
     public function __construct(CategoryService $service)
     {
         $this->service = $service;
@@ -22,103 +23,23 @@ class CategoryController extends Controller
         return $this->service->index();
     }
 
-    /**
-     * Cadastra Categoria no Banco de dados.
-     *
-     * @param CategoryRequest $request
-     * @return CategoryResource|\Illuminate\Http\JsonResponse
-     */
     public function store(CategoryRequest $request)
     {
-        try{
-            $category = Category::create($request->all());
-            if($category){
-                return new CategoryResource($category);
-            } else {
-                return Error::getError('Erro ao adicinar categoria','Categoria não cadastrada',400);
-            }
-        } catch (\Exception $e) {
-            return Error::getError('Error no servidor', 'Ocorreu um Error no servidor', 500);
-        }
+        return $this->service->store($request-all());
     }
 
-    /**
-     * Busca Categoria pelo ID.
-     *
-     * @param int $id
-     * @return CategoryResource|\Illuminate\Http\JsonResponse
-     */
     public function show($id)
     {
-        try{
-            if($id < 0) {
-                return Error::getError('ID inválido', 'ID não pode ser menor que zero', 400);
-            }
-            $category = Category::find($id);
-            if($category) {
-                return new CategoryResource($category);
-            } else {
-                return Error::getError('Não encontrado', 'Não existe Departamento com ID '.$id, 404);
-            }
-        } catch (\Exception $e) {
-            return Error::getError('Error no servidor', 'Ocorreu um Error no servidor', 500);
-        }
+        return $this->service->show($id);
     }
 
-    /**
-     * Atualiza a Categoria com o ID informado.
-     *
-     * @param CategoryRequest $request
-     * @param int $id
-     * @return CategoryResource|\Illuminate\Http\JsonResponse
-     */
     public function update(CategoryRequest $request, $id)
     {
-        try{
-            if($id < 0) {
-                return Error::getError('ID inválido', 'ID não pode ser menor que zero', 400);
-            }
-            $category = Category::find($id);
-            if($category) {
-                $category->update($request->all());
-                return new CategoryResource($category);
-            } else {
-                return Error::getError('Não encontrato', 'Não existe Departamento com ID '.$id, 404);
-            }
-        } catch (\Exception $e) {
-            return Error::getError('Error no servidor', 'Ocorreu um Error no servidor', 500);
-        }
+       return $this->update($request->all(), $id);
     }
 
-    /**
-     * Remove a Categoria com ID informado.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        try {
-            if ($id < 0) {
-                return Error::getError('ID inválido', 'ID não pode ser menor que zero', 400);
-            }
-            $category = Category::find($id);
-            if ($category) {
-                try{
-                    $category->delete();
-                } catch (\Illuminate\Database\QueryException $e) {
-                    return Error::getError('Error ao excluir Categoria',
-                        'Está categoria está relacionada à um equipamento',
-                        500);
-                }
-                return response()->json([], 204);
-            } else {
-                return Error::getError('Não existe', 'Não existe Categoria com ID ' . $id, 404);
-            }
-
-        } catch (\Exception $e) {
-            return Error::getError('Error no servidor', 'Ocorreu um Error no servidor', 500);
-        }
-
+       return $this->destroy($id);
     }
 }

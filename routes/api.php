@@ -35,12 +35,15 @@ Route::middleware('auth:api')->group(function (){
     });
 
 
+    Route::prefix('attendants')->group(function (){
+        Route::get('my-requests','AttendantController@myRequests')->middleware('scope:manage-user, read-only-attendant');
+        Route::get('','AttendantController@index')->middleware('scope:manage-user');
+        Route::post('', 'AttendantController@store')->middleware('scope:manage-attendant');
+        Route::get('/{id}','AttendantController@show')->middleware('scope:manage-attendant,read-only-attendant');
+        Route::put('','AttendantController@update')->middleware('scope:manage-attendant, edit-only-attendant');
+        Route::delete('','AttendantController@destroy')->middleware('scope:manage-attendant');
+    });
 
-       Route::get('/attendants','AttendantController@index')->middleware('scope:manage-user');
-       Route::post('/attendants', 'AttendantController@store')->middleware('scope:manage-attendant');
-       Route::get('/attendants/{id}','AttendantController@show')->middleware('scope:manage-attendant,read-only-attendant');
-       Route::put('/attendants','AttendantController@update')->middleware('scope:manage-attendant, edit-only-attendant');
-       Route::delete('/attendants','AttendantController@destroy')->middleware('scope:manage-attendant');
 
 
     Route::prefix('sectors')->group(function () {
@@ -81,9 +84,10 @@ Route::middleware('auth:api')->group(function (){
         Route::get('open','RequestController@openRequests')->middleware('scope:manage-user,read-only-user');
         Route::get('linked','RequestController@linkedRequests')->middleware('scope:manage-user,read-only-user');
         Route::get('closed','RequestController@closedRequests')->middleware('scope:manage-user,read-only-user');
-        Route::get('myRequests','RequestController@myRequests');
         Route::post('', 'RequestController@store');
         Route::get('/{id}','RequestController@show')->middleware('scope:manage-user,read-only-user');
+        Route::put('/meet/{id}','RequestController@meet')->middleware('scope:manage-user,read-only-user');
+        Route::put('/finalize/{id}','RequestController@finalize')->middleware('scope:manage-user,read-only-user');
         Route::put('/{id}','RequestController@update')->middleware('scope:manage-user');
         Route::delete('/{id}','RequestController@destroy')->middleware('scope:manage-user');
     });

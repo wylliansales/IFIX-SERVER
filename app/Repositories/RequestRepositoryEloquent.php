@@ -25,7 +25,6 @@ class RequestRepositoryEloquent extends BaseRepository implements RequestReposit
         return Request::class;
     }
 
-    
 
     /**
      * Boot up the repository, pushing criteria
@@ -34,5 +33,30 @@ class RequestRepositoryEloquent extends BaseRepository implements RequestReposit
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
-    
+
+    public function where($column, $condition, $value, $paginate)
+    {
+        return $this->model->where($column, $condition, $value)->paginate($paginate);
+    }
+
+
+    public function getFinalizedByAttendant($attendant_id)
+    {
+        return $this->model->where([
+            ['finalized', '=', '1'],
+            ['attendant_id', '=', $attendant_id]
+        ])->paginate(15);
+    }
+
+    public function save(Request $request)
+    {
+        $request->save();
+    }
+
+    public function findById($id)
+    {
+        return $this->model->find($id);
+    }
+
+
 }

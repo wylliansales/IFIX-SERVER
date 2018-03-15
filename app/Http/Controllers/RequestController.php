@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RequestRequest;
 use App\Models\Request;
 use App\Services\RequestService;
 
@@ -21,65 +22,26 @@ class RequestController extends Controller
         return $this->service->index();
     }
 
-    public function myRequests()
-    {
-       return $this->service->myRequests();
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
+        return $this->service->show($id);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function update(RequestRequest $request, $id)
     {
-        //
+        $this->service->update($request->all(), $id);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        return $this->service->destroy($id);
     }
 
     public function newsRequests()
@@ -90,5 +52,20 @@ class RequestController extends Controller
     public function openRequests()
     {
         return $this->service->openRequests();
+    }
+
+    public function closedRequests()
+    {
+        return $this->service->closedRequests();
+    }
+
+    public function meet(Request $request, $id)
+    {
+        return $this->service->meet($id);
+    }
+
+    public function finalize(Request $request, $id)
+    {
+        return $this->service->finalize($id);
     }
 }
