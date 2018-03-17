@@ -14,7 +14,7 @@ Route::middleware('auth:api')->group(function (){
         Route::get('/released','UserController@released')->middleware('scope:manage-user');
         Route::get('/{id}','UserController@show')->middleware('scope:manage-user,read-only-user');
         Route::put('/{id}','UserController@update')->middleware('scope:manage-user, edit-only-user');
-        Route::put('/userlogin','UserController@getUserLogin');
+        Route::get('/user/login','UserController@getUserLogin');
         Route::put('/release/{id}','UserController@releaseUser')->middleware('scope:manage-user');
         Route::put('/block/{id}','UserController@blockUser')->middleware('scope:manage-user');
         Route::delete('/{id}','UserController@destroy')->middleware('scope:manage-user');

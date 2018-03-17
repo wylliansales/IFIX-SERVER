@@ -19,15 +19,14 @@ use Prettus\Repository\Traits\TransformableTrait;
  */
 class Administrator extends Model implements Transformable
 {
-    use TransformableTrait;
+    use TransformableTrait, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = [
-        'user_id'
-    ];
+    protected $fillable = ['user_id'];
+    protected $dates = ['deleted_at'];
 
 }

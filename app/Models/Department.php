@@ -30,4 +30,9 @@ class Department extends Model implements Transformable
         return $this->belongsToMany('App\Models\Attendant', 'attendant_department');
     }
 
+    public function requests()
+    {
+        return $this->hasMany('App\Models\Request');
+    }
+
 }

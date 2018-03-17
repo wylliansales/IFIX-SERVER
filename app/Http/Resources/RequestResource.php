@@ -17,7 +17,7 @@ class RequestResource extends Resource
         return [
             'id'                => $this->id,
             'subject_matter'    => $this->subject_matter,
-            'department'        => $this->department->name,
+            'department'        => optional($this->department)->name,
             'user'              => $this->user->name,
             'attendant'         => !empty($this->attendant_id)? $this->attendant->user->name: null,
             'finalized'         => $this->finalized,

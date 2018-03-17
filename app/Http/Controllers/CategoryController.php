@@ -25,7 +25,7 @@ class CategoryController extends Controller
 
     public function store(CategoryRequest $request)
     {
-        return $this->service->store($request-all());
+        return $this->service->store($request->all());
     }
 
     public function show($id)
@@ -40,6 +40,6 @@ class CategoryController extends Controller
 
     public function destroy($id)
     {
-       return $this->destroy($id);
+       return $this->service->destroy($id);
     }
 }
