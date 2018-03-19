@@ -39,5 +39,17 @@ class EquipmentRepositoryEloquent extends BaseRepository implements EquipmentRep
     {
         return $this->model->find($id);
     }
+
+    public function searchEquipment($term)
+    {
+        return $this->model
+            ->leftJoin('categories', 'equipments.category_id', '=', 'categories.id')
+            ->where('code', 'like', $term.'%')
+            ->orWhere('equipments.description', 'like', $term.'%')
+            ->orWhere('categories.name', 'like', $term.'%')
+            ->orderBy('code', 'asc')
+            ->limit(8)
+            ->get();
+    }
     
 }

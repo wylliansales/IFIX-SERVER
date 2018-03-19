@@ -63,7 +63,7 @@ class RequestService
     public function show($id)
     {
         try{
-            if($id < 0 || !is_int($id)) {
+            if($id < 0) {
                 return Error::getError(true, 'ID inválido, ID não pode ser menor que zero', 400);
             }
             $request = $this->repository->findById($id);

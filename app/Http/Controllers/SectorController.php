@@ -44,4 +44,9 @@ class SectorController extends Controller
     {
         return $this->service->destroy($id);
     }
+
+    public function search($term)
+    {
+        return $this->service->search($term);
+    }
 }

@@ -115,4 +115,15 @@ class SectorService
            }
        }
 
+       public function search($term)
+       {
+           try{
+               $sectors = $this->repository->searchSector($term);
+
+               return SectorResource::collection($sectors);
+           } catch(\Exception $e){
+               return Error::getError(true,'Ocorreu um error no servidor',500);
+           }
+       }
+
 }

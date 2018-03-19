@@ -40,4 +40,14 @@ class SectorRepositoryEloquent extends BaseRepository implements SectorRepositor
     {
         return $this->model->find($id);
     }
+
+    public function searchSector($term)
+    {
+        return $this->model
+            ->where('name', 'like', $term.'%')
+            ->orWhere('description', 'like', $term.'%')
+            ->orderBy('name', 'asc')
+            ->limit(8)
+            ->get();
+    }
 }

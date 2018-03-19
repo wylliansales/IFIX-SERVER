@@ -32,7 +32,7 @@ class EquipmentService
     public function index()
     {
         try{
-            return EquipmentResource::collection($this->repository->paginate());
+            return EquipmentResource::collection($this->repository->paginate(7));
         } catch (\Exception $e) {
             return Error::getError(true, 'Ocorreu um error no servidor',500);
         }
@@ -109,6 +109,17 @@ class EquipmentService
                 case ModelNotFoundException::class: return Error::getError(true,'Não excluído, verifique os parâmetros',400);
                 default: return Error::getError(true,'Ocorreu um error no servidor',500);
             }
+        }
+    }
+
+    public function search($term)
+    {
+        try{
+            $equipments = $this->repository->searchEquipment($term);
+            return EquipmentResource::collection($equipments);
+
+        } catch (\Exception $e){
+            return  Error::getError(true,'Ocorreu um error no servidor',500);
         }
     }
 

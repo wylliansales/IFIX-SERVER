@@ -18,8 +18,8 @@ class RequestResource extends Resource
             'id'                => $this->id,
             'subject_matter'    => $this->subject_matter,
             'department'        => optional($this->department)->name,
-            'user'              => $this->user->name,
-            'attendant'         => !empty($this->attendant_id)? $this->attendant->user->name: null,
+            'user'              => optional($this->user)->name,
+           // 'attendant'         => !empty($this->attendant_id)? $this->attendant->user->name: null,
             'finalized'         => $this->finalized,
             'created_at'        => optional($this->created_at)->format('d/m/Y H:i'),
         ];

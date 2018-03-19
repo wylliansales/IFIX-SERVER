@@ -24,4 +24,9 @@ class Category extends Model implements Transformable
 
     protected $fillable =['name', 'description'];
     protected $dates = ['deleted_at'];
+
+    public function equipments()
+    {
+        return $this->hasMany('App\Models\Equipment');
+    }
 }

@@ -36,6 +36,7 @@ Route::middleware('auth:api')->group(function (){
         Route::get('','SectorController@index')->middleware('scope:manage-user');
         Route::post('', 'SectorController@store')->middleware('scope:manage-user');
         Route::get('/{id}','SectorController@show')->middleware('scope:manage-user,read-only-user');
+        Route::get('search/{to}','SectorController@search')->middleware('scope:manage-user,read-only-user');
         Route::put('/{id}','SectorController@update')->middleware('scope:manage-user, edit-only-user');
         Route::delete('/{id}','SectorController@destroy')->middleware('scope:manage-user');
     });
@@ -44,6 +45,7 @@ Route::middleware('auth:api')->group(function (){
         Route::get('','EquipmentController@index')->middleware('scope:manage-user');
         Route::post('', 'EquipmentController@store')->middleware('scope:manage-user');
         Route::get('/{id}','EquipmentController@show')->middleware('scope:manage-user,read-only-user');
+        Route::get('/search/{to}','EquipmentController@search')->middleware('scope:manage-user,read-only-user');
         Route::put('/{id}','EquipmentController@update')->middleware('scope:manage-user, edit-only-user');
         Route::delete('/{id}','EquipmentController@destroy')->middleware('scope:manage-user');
     });
