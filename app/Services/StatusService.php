@@ -57,10 +57,12 @@ class StatusService
        public function show($id)
        {
            try{
-               if($id < 0) {
+               if($id < 0 || !is_int($id)) {
                    return Error::getError(true, 'ID inválido, ID não pode ser menor que zero', 400);
                }
+
                $sector = $this->repository->findById($id);
+
                if($sector) {
                    return new StatusResource($sector);
                } else {
@@ -108,6 +110,21 @@ class StatusService
                    case ModelNotFoundException::class: return Error::getError(true,'Não excluido, verifique os parâmetros',400);
                    default: return Error::getError(true,'Ocorreu um error no servidor',500);
                }
+           }
+       }
+
+       public function search($term)
+       {
+           try{
+               if($term){
+                   $status = $this->repository->searchStatus($term);
+               } else {
+                   $status = $this->index();
+               }
+
+                return StatusResource::collection($status);
+           } catch(\Exception $e) {
+               return Error::getError(true,'Ocorreu um error no servidor',500);
            }
        }
 

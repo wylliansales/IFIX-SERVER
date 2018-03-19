@@ -62,7 +62,7 @@ class UserService
     public function show($id)
     {
         try{
-            if($id < 0) {
+            if($id < 0 || !is_int($id)) {
                 return Error::getError(true, 'ID inválido, Id não pode ser menor que zero', 400);
             }
             $user = $this->repository->findById($id);

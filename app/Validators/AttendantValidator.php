@@ -18,7 +18,11 @@ class AttendantValidator extends LaravelValidator
      * @var array
      */
     protected $rules = [
-        ValidatorInterface::RULE_CREATE => [],
-        ValidatorInterface::RULE_UPDATE => [],
+        ValidatorInterface::RULE_CREATE => [
+            'user_id'       => 'required|integer|min:1'
+        ],
+        ValidatorInterface::RULE_UPDATE => [
+            'user_id'       => 'required|integer|min:1'
+        ],
     ];
 }

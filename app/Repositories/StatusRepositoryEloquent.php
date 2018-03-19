@@ -34,5 +34,15 @@ class StatusRepositoryEloquent extends BaseRepository implements StatusRepositor
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
+
+    public function searchStatus($term)
+    {
+        return \DB::table('status')
+            ->where('name', 'like', $term.'%')
+            ->orWhere('description', 'like', $term.'%')
+            ->orderBy('name', 'asc')
+            ->limit(8)
+            ->get();
+    }
     
 }

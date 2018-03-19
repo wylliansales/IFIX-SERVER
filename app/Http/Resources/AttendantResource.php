@@ -16,8 +16,9 @@ class AttendantResource extends Resource
     {
         return [
             'id'            => $this->id,
-            'name'          => $this->user->name,
-            'email'         => $this->user->email,
+            'name'          => optional($this->user)->name,
+            'email'         => optional($this->user)->email,
+            'departments'   => DepartmentResource::collection($this->departments),
             'coordinator'   => $this->coordinator,
         ];
     }

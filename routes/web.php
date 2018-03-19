@@ -12,5 +12,5 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    echo "IFIX-SERVER ONLINE"; //view('welcome');
 });

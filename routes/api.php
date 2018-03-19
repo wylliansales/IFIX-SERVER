@@ -27,7 +27,7 @@ Route::middleware('auth:api')->group(function (){
         Route::post('', 'AttendantController@store')->middleware('scope:manage-attendant');
         Route::get('/{id}','AttendantController@show')->middleware('scope:manage-attendant,read-only-attendant');
         Route::put('','AttendantController@update')->middleware('scope:manage-attendant, edit-only-attendant');
-        Route::delete('','AttendantController@destroy')->middleware('scope:manage-attendant');
+        Route::delete('/{id}','AttendantController@destroy')->middleware('scope:manage-user, manage-attendant');
     });
 
 
@@ -82,6 +82,7 @@ Route::middleware('auth:api')->group(function (){
         Route::get('','StatusController@index')->middleware('scope:manage-user');
         Route::post('', 'StatusController@store')->middleware('scope:manage-user');
         Route::get('/{id}','StatusController@show')->middleware('scope:manage-user,read-only-user');
+        Route::get('/search/{to}','StatusController@search')->middleware('scope:manage-user,read-only-user');
         Route::put('/{id}','StatusController@update')->middleware('scope:manage-user, edit-only-user');
         Route::delete('/{id}','StatusController@destroy')->middleware('scope:manage-user');
     });

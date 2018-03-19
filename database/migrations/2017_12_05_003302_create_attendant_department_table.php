@@ -16,10 +16,11 @@ class CreateAttendantDepartmentTable extends Migration
         Schema::create('attendant_department', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('attendant_id')->unsigned();
-            $table->foreign('attendant_id')->references('id')->on('attendants');
             $table->integer('department_id')->unsigned();
-            $table->foreign('department_id')->references('id')->on('departments');
             $table->timestamps();
+
+            $table->foreign('attendant_id')->references('id')->on('attendants');
+            $table->foreign('department_id')->references('id')->on('departments');
         });
     }
 

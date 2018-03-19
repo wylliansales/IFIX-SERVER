@@ -60,7 +60,7 @@ class EquipmentService
     public function show($id)
     {
         try{
-            if($id < 0) {
+            if($id < 0 || !is_int($id)) {
                 return Error::getError(true,'Id inválido, não pode ser menor que zero',400);
             }
             $equipment = $this->repository->findById($id);

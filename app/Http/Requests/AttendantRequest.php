@@ -24,8 +24,7 @@ class AttendantRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id'       => 'required|integer|min:1',
-            'coordinator'   => 'required|boolean',
+
         ];
     }
 }
