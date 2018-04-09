@@ -57,14 +57,14 @@ class StatusService
        public function show($id)
        {
            try{
-               if($id < 0 || !is_int($id)) {
+               if($id <= 0) {
                    return Error::getError(true, 'ID inválido, ID não pode ser menor que zero', 400);
                }
 
-               $sector = $this->repository->findById($id);
+               $status = $this->repository->findById($id);
 
-               if($sector) {
-                   return new StatusResource($sector);
+               if($status) {
+                   return new StatusResource($status);
                } else {
                    return Error::getError(true,'Não existe setor com ID '.$id,404);
                }

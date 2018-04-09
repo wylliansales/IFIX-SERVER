@@ -20,5 +20,13 @@ class DatabaseSeeder extends Seeder
         $this->call(DepartmentsTableSeeder::class);
          $this->call(EquipmentsTableSeeder::class);
          //$this->call(RequestsTableSeeder::class);
+
+        DB::table('users')->insert([
+            'name'     => 'Coordenador',
+            'email'      => 'admin@admin.com',
+            'password'   => bcrypt('123456'),
+            'activated' => '1',
+            'remember_token' => str_random(10),
+        ]);
     }
 }

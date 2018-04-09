@@ -3,7 +3,7 @@ namespace PHPSTORM_META {
 
    /**
     * PhpStorm Meta file, to provide autocomplete information for PhpStorm
-    * Generated on 2018-03-06 23:59:48.
+    * Generated on 2018-04-08 05:40:42.
     *
     * @author Barry vd. Heuvel <barryvdh@gmail.com>
     * @see https://github.com/barryvdh/laravel-ide-helper
@@ -51,6 +51,7 @@ namespace PHPSTORM_META {
         'App\Repositories\CategoryRepository' => \App\Repositories\CategoryRepositoryEloquent::class,
         'App\Repositories\RequestRepository' => \App\Repositories\RequestRepositoryEloquent::class,
         'App\Repositories\AttendantRepository' => \App\Repositories\AttendantRepositoryEloquent::class,
+        'App\Repositories\StatusRepository' => \App\Repositories\StatusRepositoryEloquent::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'translation.loader' => \Illuminate\Translation\FileLoader::class,
         'translator' => \Illuminate\Translation\Translator::class,
@@ -193,6 +194,7 @@ namespace PHPSTORM_META {
         'App\Repositories\CategoryRepository' => \App\Repositories\CategoryRepositoryEloquent::class,
         'App\Repositories\RequestRepository' => \App\Repositories\RequestRepositoryEloquent::class,
         'App\Repositories\AttendantRepository' => \App\Repositories\AttendantRepositoryEloquent::class,
+        'App\Repositories\StatusRepository' => \App\Repositories\StatusRepositoryEloquent::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'translation.loader' => \Illuminate\Translation\FileLoader::class,
         'translator' => \Illuminate\Translation\Translator::class,
@@ -335,6 +337,7 @@ namespace PHPSTORM_META {
         'App\Repositories\CategoryRepository' => \App\Repositories\CategoryRepositoryEloquent::class,
         'App\Repositories\RequestRepository' => \App\Repositories\RequestRepositoryEloquent::class,
         'App\Repositories\AttendantRepository' => \App\Repositories\AttendantRepositoryEloquent::class,
+        'App\Repositories\StatusRepository' => \App\Repositories\StatusRepositoryEloquent::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'translation.loader' => \Illuminate\Translation\FileLoader::class,
         'translator' => \Illuminate\Translation\Translator::class,
@@ -477,6 +480,7 @@ namespace PHPSTORM_META {
         'App\Repositories\CategoryRepository' => \App\Repositories\CategoryRepositoryEloquent::class,
         'App\Repositories\RequestRepository' => \App\Repositories\RequestRepositoryEloquent::class,
         'App\Repositories\AttendantRepository' => \App\Repositories\AttendantRepositoryEloquent::class,
+        'App\Repositories\StatusRepository' => \App\Repositories\StatusRepositoryEloquent::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'translation.loader' => \Illuminate\Translation\FileLoader::class,
         'translator' => \Illuminate\Translation\Translator::class,
@@ -619,6 +623,7 @@ namespace PHPSTORM_META {
         'App\Repositories\CategoryRepository' => \App\Repositories\CategoryRepositoryEloquent::class,
         'App\Repositories\RequestRepository' => \App\Repositories\RequestRepositoryEloquent::class,
         'App\Repositories\AttendantRepository' => \App\Repositories\AttendantRepositoryEloquent::class,
+        'App\Repositories\StatusRepository' => \App\Repositories\StatusRepositoryEloquent::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'translation.loader' => \Illuminate\Translation\FileLoader::class,
         'translator' => \Illuminate\Translation\Translator::class,
@@ -761,6 +766,7 @@ namespace PHPSTORM_META {
         'App\Repositories\CategoryRepository' => \App\Repositories\CategoryRepositoryEloquent::class,
         'App\Repositories\RequestRepository' => \App\Repositories\RequestRepositoryEloquent::class,
         'App\Repositories\AttendantRepository' => \App\Repositories\AttendantRepositoryEloquent::class,
+        'App\Repositories\StatusRepository' => \App\Repositories\StatusRepositoryEloquent::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'translation.loader' => \Illuminate\Translation\FileLoader::class,
         'translator' => \Illuminate\Translation\Translator::class,
@@ -903,6 +909,7 @@ namespace PHPSTORM_META {
         'App\Repositories\CategoryRepository' => \App\Repositories\CategoryRepositoryEloquent::class,
         'App\Repositories\RequestRepository' => \App\Repositories\RequestRepositoryEloquent::class,
         'App\Repositories\AttendantRepository' => \App\Repositories\AttendantRepositoryEloquent::class,
+        'App\Repositories\StatusRepository' => \App\Repositories\StatusRepositoryEloquent::class,
         'blade.compiler' => \Illuminate\View\Compilers\BladeCompiler::class,
         'translation.loader' => \Illuminate\Translation\FileLoader::class,
         'translator' => \Illuminate\Translation\Translator::class,

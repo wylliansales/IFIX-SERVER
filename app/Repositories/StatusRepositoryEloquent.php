@@ -35,6 +35,12 @@ class StatusRepositoryEloquent extends BaseRepository implements StatusRepositor
         $this->pushCriteria(app(RequestCriteria::class));
     }
 
+    public function findById($id)
+    {
+
+        return $this->model->find($id);
+    }
+
     public function searchStatus($term)
     {
         return \DB::table('status')

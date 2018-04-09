@@ -16,6 +16,7 @@ use App\Repositories\AttendantRepository;
 use App\Repositories\RequestRepository;
 use App\Validators\RequestValidator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Auth;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 
@@ -130,7 +131,7 @@ class RequestService
     public function openRequests()
     {
         try{
-            $attendant = $this->attendantRepository->findWhere(['user_id'=>\Auth::user()->token()->user_id]);
+            $attendant = $this->attendantRepository->findWhere(['user_id'=>Auth::user()->token()->user_id]);
 
             if($attendant[0]->coordinator){
                 $requests = $this->repository->orderBy('created_at', 'desc')->findWhere(['finalized'=> '0', ['attendant_id', '>', '0']]);
@@ -167,11 +168,16 @@ class RequestService
     {
         try{
               $attendant = $this->attendantRepository->findWhere(['user_id'=>\Auth::user()->token()->user_id]);
-              $request = $this->repository->find($id);
-              $request->attendant_id = $attendant[0]->id;
+              if($attendant){
+                  $request = $this->repository->find($id);
+                  $request->attendant_id = $attendant[0]->id;
 
-              $this->repository->save($request);
-              return response()->json(['data'=> $request->id],200);
+                  $this->repository->save($request);
+                  return response()->json(['data'=> $request->id],200);
+              } else {
+                  return Error::getError(true,'Atendente não localizado',204);
+              }
+
 
         } catch(\Exception $e) {
             return Error::getError(true,'Ocorreu um error no servidor',500);
