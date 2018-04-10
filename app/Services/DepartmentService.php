@@ -52,8 +52,8 @@ class DepartmentService
     public function show($id)
     {
         try{
-            if($id < 0 || !is_int($id)) {
-                return Error::getError(true, 'ID inválido, ID não pode ser menor que zero', 400);
+            if($id < 1) {
+                return Error::getError(true, 'ID inválido, ID não pode ser menor ou igual a zero', 400);
             }
             $department = $this->repository->findById($id);
             if($department) {
