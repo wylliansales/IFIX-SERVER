@@ -54,11 +54,6 @@ class UserController extends Controller
 
     }
 
-    public function createToken(AttendantRepository $repository){
-        $attedant = $repository->paginate();
-      return $attedant;
-    }
-
     public function loginIsCoordinator($user_id){
         return $this->service->loginIsCoordinator($user_id);
     }

@@ -32,7 +32,7 @@ class EquipmentService
     public function index()
     {
         try{
-            return EquipmentResource::collection($this->repository->paginate(7));
+            return EquipmentResource::collection($this->repository->paginate());
         } catch (\Exception $e) {
             return Error::getError(true, 'Ocorreu um error no servidor',500);
         }

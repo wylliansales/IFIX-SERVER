@@ -35,7 +35,7 @@ class SectorService
        public function index()
        {
            try{
-               return SectorResource::collection($this->repository->paginate(7));
+               return SectorResource::collection($this->repository->paginate());
            } catch (\Exception $e) {
                return Error::getError(true,'Ocorreu um error no servidor',500);
            }

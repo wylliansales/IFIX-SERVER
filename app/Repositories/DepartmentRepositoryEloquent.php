@@ -15,6 +15,12 @@ use App\Validators\DepartmentValidator;
  */
 class DepartmentRepositoryEloquent extends BaseRepository implements DepartmentRepository
 {
+
+    protected $fieldSearchable = [
+            'name'          => 'like',
+            'description'   => 'like'
+    ];
+
     /**
      * Specify Model class name
      *

@@ -31,7 +31,7 @@ class StatusService
        public function index()
        {
            try{
-               return StatusResource::collection($this->repository->paginate(7));
+               return StatusResource::collection($this->repository->paginate());
            } catch (\Exception $e) {
                return Error::getError(true,'Ocorreu um error no servidor',500);
            }

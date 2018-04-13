@@ -15,6 +15,13 @@ use App\Validators\AttendantValidator;
  */
 class AttendantRepositoryEloquent extends BaseRepository implements AttendantRepository
 {
+
+    protected $fieldSearchable = [
+            'user.name'         => 'like',
+            'user.email'        => 'like',
+            'departments.name'  => 'like',
+    ];
+
     /**
      * Specify Model class name
      *

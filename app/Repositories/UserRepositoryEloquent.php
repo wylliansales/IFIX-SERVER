@@ -15,6 +15,11 @@ use App\Models\User;
 class UserRepositoryEloquent extends BaseRepository implements UserRepository
 {
 
+    protected $fieldSearchable = [
+            'name'      => 'like',
+            'email'     => 'like'   
+    ];
+
 
     /**
      * Specify Model class name

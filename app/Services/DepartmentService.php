@@ -26,7 +26,7 @@ class DepartmentService
     public function index()
     {
         try{
-            return DepartmentResource::collection($this->repository->paginate(7));
+            return DepartmentResource::collection($this->repository->paginate());
         } catch (\Exception $e) {
             return Error::getError(true,'Ocorreu um error no servidor',500);
         }

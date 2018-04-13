@@ -15,6 +15,7 @@ use Prettus\Repository\Traits\TransformableTrait;
  * @property int id
  * @property int user_id
  * @property boolean coordinator
+ * @property boolean active
  * @property Carbon created_at
  * @property Carbon updated_at
  */
@@ -22,7 +23,7 @@ class Attendant extends Model implements Transformable
 {
     use TransformableTrait, SoftDeletes;
 
-    protected $fillable = ['user_id', 'coordinator'];
+    protected $fillable = ['user_id', 'coordinator', 'active'];
     protected $dates = ['deleted_at'];
 
     public function departments()

@@ -16,10 +16,12 @@ class AttendantResource extends Resource
     {
         return [
             'id'            => $this->id,
-            'name'          => optional($this->user)->name,
-            'email'         => optional($this->user)->email,
-            'departments'   => DepartmentResource::collection($this->departments),
+            'name'          => $this->user->name,
+            'email'         => $this->user->email,
+            'active'        => $this->active,
             'coordinator'   => $this->coordinator,
+            'departments'   => DepartmentResource::collection($this->departments),
+            
         ];
     }
 }
