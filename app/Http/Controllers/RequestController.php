@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RequestRequest;
-use App\Models\Request;
+use Illuminate\Http\Request;
 use App\Services\RequestService;
 
 
@@ -67,5 +67,15 @@ class RequestController extends Controller
     public function finalize(Request $request, $id)
     {
         return $this->service->finalize($id);
+    }
+
+    public function defineStatus(Request $request)
+    {
+        return $this->service->defineStatus($request->all());
+    }
+
+    public function getStatusRequest($id)
+    {
+        return $this->service->getStatusRequest($id);
     }
 }

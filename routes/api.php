@@ -73,7 +73,9 @@ Route::middleware('auth:api')->group(function (){
         Route::get('linked','RequestController@linkedRequests')->middleware('scope:manage-user,read-only-user');
         Route::get('closed','RequestController@closedRequests')->middleware('scope:manage-user,read-only-user');
         Route::post('', 'RequestController@store');
+        Route::post('define/status', 'RequestController@defineStatus')->middleware('scope:manage-user,read-only-user');
         Route::get('/{id}','RequestController@show')->middleware('scope:manage-user,read-only-user');
+        Route::get('status/{id}','RequestController@getStatusRequest')->middleware('scope:manage-user,read-only-user');
         Route::put('/meet/{id}','RequestController@meet')->middleware('scope:manage-user,read-only-user');
         Route::put('/finalize/{id}','RequestController@finalize')->middleware('scope:manage-user,read-only-user');
         Route::put('/{id}','RequestController@update')->middleware('scope:manage-user');

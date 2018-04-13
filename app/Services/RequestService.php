@@ -12,9 +12,11 @@ namespace App\Services;
 use App\Exceptions\Error;
 use App\Http\Resources\Request;
 use App\Http\Resources\RequestResource;
+use App\Http\Resources\StatusRequestResource;
 use App\Repositories\AttendantRepository;
 use App\Repositories\RequestRepository;
 use App\Validators\RequestValidator;
+use App\Validators\RequestStatusValidator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
 use Prettus\Validator\Contracts\ValidatorInterface;
@@ -26,12 +28,14 @@ class RequestService
     private $repository;
     private $validator;
     private $attendantRepository;
+    private $requestStatusValidator;
 
-    public function __construct(RequestValidator $validator, RequestRepository $repository, AttendantRepository $attendantRepository)
+    public function __construct(RequestValidator $validator, RequestStatusValidator $requestStatusValidator, RequestRepository $repository, AttendantRepository $attendantRepository)
     {
-        $this->validator            = $validator;
-        $this->repository           = $repository;
-        $this->attendantRepository  = $attendantRepository;
+        $this->validator                = $validator;
+        $this->repository               = $repository;
+        $this->attendantRepository      = $attendantRepository;
+        $this->requestStatusValidator   = $requestStatusValidator;
     }
 
     public function index()
@@ -193,6 +197,38 @@ class RequestService
 
             return response()->json(['data'=> ['id'=>$request->id]],200);
         } catch (\Exception $e){
+            return Error::getError(true,'Ocorreu um error no servidor',500);
+        }
+    }
+
+    public function defineStatus($data)
+    {
+        try{
+            $this->requestStatusValidator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
+
+            if($this->repository->defineStatus($data)){
+                $status = $this->repository->getStatusRequest($data['request_id']);
+                return StatusRequestResource::collection($status);
+            }
+                     
+
+        } catch (\Exception $e){
+            switch (get_class($e))
+            {
+                case ValidatorException::class: return $e;
+                default: return Error::getError(true,'Ocorreu um error no servidor',500);
+            }
+        }
+    }
+
+    public function getStatusRequest($request_id)
+    {
+        try{
+            $status = $this->repository->getStatusRequest($request_id);
+
+            return StatusRequestResource::collection($status);
+
+        } catch(\Exception $e){
             return Error::getError(true,'Ocorreu um error no servidor',500);
         }
     }

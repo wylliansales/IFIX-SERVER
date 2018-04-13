@@ -19,7 +19,7 @@ class CreateRequestStatusTable extends Migration
             $table->foreign('request_id')->references('id')->on('requests');
             $table->integer('status_id')->unsigned();
             $table->foreign('status_id')->references('id')->on('status');
-            $table->string('description');
+            $table->string('observation');
             $table->timestamps();
         });
     }

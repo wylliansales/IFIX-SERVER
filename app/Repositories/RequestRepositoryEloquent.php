@@ -58,5 +58,23 @@ class RequestRepositoryEloquent extends BaseRepository implements RequestReposit
         return $this->model->find($id);
     }
 
+    public function defineStatus($data)
+    {
+        $data['created_at'] = date("Y-m-d H:i:s");
+        return \DB::table('request_status')->insertGetId($data);
+    }
+
+    public function getStatusRequest($id)
+    {
+        //return \DB::table('request_status')->where('request_id',  $id)->orderBy('created_at', 'desc')->get();
+
+        return  \DB::table('request_status')
+                ->join('status', 'request_status.status_id', '=', 'status.id')
+                ->select('status.name', 'status.description', 'request_status.observation', 'request_status.created_at')
+                ->where('request_id',  $id)
+                ->orderBy('created_at', 'desc')
+                ->get();
+    }
+
 
 }
