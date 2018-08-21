@@ -37,7 +37,7 @@ class AuthServiceProvider extends ServiceProvider
            'edit-only-attendant'    => 'Edit only attendant',
         ]);
 
-//        Passport::tokensExpireIn(now()->addMinutes(30));
+         Passport::tokensExpireIn(now()->addDays(30));
 //
 //        Passport::refreshTokensExpireIn(now()->addHours(1));
     }

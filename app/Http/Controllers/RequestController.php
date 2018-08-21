@@ -22,11 +22,9 @@ class RequestController extends Controller
         return $this->service->index();
     }
 
-
-
     public function store(Request $request)
     {
-        //
+        return $this->service->store($request->all());
     }
 
     public function show($id)

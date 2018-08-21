@@ -41,6 +41,17 @@ class SectorService
            }
        }
 
+      public function all()
+      {
+        try{
+            $sectors = $this->repository->all();
+
+            return response()->json($sectors, 200);
+        } catch (\Exception $e) {
+            return Error::getError(true,'Ocorreu um error no servidor',500);
+        }
+      } 
+
        public function store($data)
        {
            try{

@@ -21,6 +21,11 @@ class DepartmentController extends Controller
         return $this->service->index();
     }
 
+    public function all()
+    {
+        return $this->service->all();
+    }
+
 
     public function store(DepartmentRequest $request)
     {

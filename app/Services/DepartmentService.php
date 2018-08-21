@@ -32,6 +32,17 @@ class DepartmentService
         }
     }
 
+    public function all()
+    {
+        try{
+            $departments = $this->repository->all();
+
+            return response()->json($departments, 200);
+        } catch (\Exception $e) {
+            return Error::getError(true,'Ocorreu um error no servidor',500);
+        }
+    }
+
     public function store($data)
     {
         try{

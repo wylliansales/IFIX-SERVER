@@ -34,6 +34,7 @@ Route::middleware('auth:api')->group(function (){
 
     Route::prefix('sectors')->group(function () {
         Route::get('','SectorController@index')->middleware('scope:manage-user');
+        Route::get('/all', 'SectorController@all');
         Route::post('', 'SectorController@store')->middleware('scope:manage-user');
         Route::get('/{id}','SectorController@show')->middleware('scope:manage-user,read-only-user');
         Route::get('search/{to}','SectorController@search')->middleware('scope:manage-user,read-only-user');
@@ -51,7 +52,8 @@ Route::middleware('auth:api')->group(function (){
     });
 
     Route::prefix('departments')->group(function () {
-        Route::get('','DepartmentController@index')->middleware('scope:manage-user');
+        Route::get('','DepartmentController@index');
+        Route::get('/all', 'DepartmentController@all');
         Route::post('', 'DepartmentController@store')->middleware('scope:manage-user');
         Route::get('/{id}','DepartmentController@show')->middleware('scope:manage-user,read-only-user');
         Route::put('/{id}','DepartmentController@update')->middleware('scope:manage-user, edit-only-user');

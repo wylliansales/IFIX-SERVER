@@ -54,6 +54,10 @@ class RequestService
             $this->validator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
 
             $request = $this->repository->create($data);
+
+            $equipment_request['request_id'] = $request->id;
+            $equipment_request['equipment_id'] = $data['equipment_id'];
+
             return new RequestResource($request);
 
         } catch (\Exception $e) {
